@@ -103,7 +103,8 @@ class EclParser
   end
   
   def parse!
-    trs = @doc.css("table.KOLOROWA")[2].children.drop(4)
+    trs = @doc.css("table.KOLOROWA")[2].children
+    trs = trs[4, trs.size-1]
     
     (0...(trs.size / 4)).each do |i|
       k = 4*i
@@ -129,7 +130,7 @@ class EclParser
       
     end
     
-    @days.each(&:sort!)
+    @days.each {|d| d.sort! }
   end
   
   def day_id(day)
@@ -150,14 +151,13 @@ class EclParser
       @hour_size = 12
       @entry_height = 5
       
-      sizes = days.map(&:size)
-      rows_count = sizes.inject {|s,e| s+e }
+      rows_count = days.inject(0) {|s,e| s+e.size }
 
       define_grid :rows => rows_count*@entry_height+3, :columns => @hour_size*hours.size
       # grid.show_all
       
       # hours
-      hours.each.with_index do |hour, i|
+      hours.each_with_index do |hour, i|
         grid([1, @hour_size*i], [2, @hour_size*(i+1)-1]).bounding_box do
           text "%02d:00" % hour
         end
@@ -172,7 +172,7 @@ class EclParser
       row = 2
       
       
-      days.each.with_index do |day, dindex|
+      days.each_with_index do |day, dindex|
         next if day.empty?
 
         ds = day.size*@entry_height
@@ -207,7 +207,7 @@ class EclParser
           end
           
           (grid [row+r+2, sl], [row+r+2, el]).bounding_box do
-            text (entry.lecturer || ""), :align => :center, :size => 6
+            text(entry.lecturer || "", :align => :center, :size => 6)
           end
           
           (grid [row+r+3, sl], [row+r+3, el]).bounding_box do
