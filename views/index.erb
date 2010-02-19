@@ -3,13 +3,16 @@
   <head>
     <title>pwr</title>
     <meta content='text/html; charset=utf-8' http-equiv='content-type'></meta>
-    <link href='/reset.css' rel='stylesheet' type='text/css' />
-    <link href='/master.css' rel='stylesheet' type='text/css' />
+    <link href='http://s.teamon.eu/assets/heroku.css' rel='stylesheet' type='text/css' />
   </head>
   <body>
     <div id="container">
       <div id='main'>    
-        <h1>Generator planu PWR <span>(0.1.0)</span></h1>  
+        <h1>Generator planu PWR <span>(0.1.0)</span></h1> 
+        <div class="info"> 
+          <a href="http://github.com/teamon/pwr">source code</a>
+        </div>
+        
         <form action="/plan" method="post">
           <fieldset>
             <textarea name="data"></textarea>
@@ -30,7 +33,16 @@
       </div>
 
       <div id='foot'>
-        &copy; 2010 / <a href='http://teamon.eu'>http://teamon.eu</a>
+        <div id="more">
+          <a href="http://blog.teamon.eu">blog</a> |
+          <a href="http://teamon.tumblr.com">tumblr</a> |
+          <a href="http://github.com/teamon">github</a> |
+          <a href="http://klp.heroku.com">KLP Printer</a> |
+          <a href="http://pwr.heroku.com">Generator planu PWR</a>
+        </div>
+        <p class="copy">
+          &copy; 2010 | <a href='http://teamon.eu'>teamon.eu</a>
+        </p>
       </div>
     </div>
   </body>
