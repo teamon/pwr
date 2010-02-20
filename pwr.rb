@@ -2,7 +2,9 @@
 
 require "rubygems"
 require "sinatra"
-require "parser"
+require "lib/data"
+require "lib/parser"
+require "lib/pdf"
 
 get "/" do
   erb :index
@@ -11,7 +13,10 @@ end
 post "/plan" do
   begin
     if params[:data]
-      send_data EclParser.generate!(params[:data]), :filename => "plan-pwr.pdf", 
+      days = EclParser.parse!(params[:data])
+      pdf = PdfGenerator.generate!(days)
+      
+      send_data pdf, :filename => "plan-pwr.pdf", 
         :disposition => "attachment", :type => 'application/pdf'
     else
       "Error!"

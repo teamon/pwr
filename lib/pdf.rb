@@ -1,145 +1,24 @@
-# encoding: utf-8
+# encoding: urf-8
 
-require "nokogiri"
 require "prawn"
 require "prawn/layout"
 
-class Day
-  attr_accessor :id, :entries
-  
-  def initialize(id)
-    @id = id
-    @entries = []
-  end
-  
-  def <<(entry)
-    @entries << entry
-  end
-  
-  def name
-    ["Poniedziałek", "Wtorek", "środa", "Czwartek", "Piątek", "Sobota", "Niedziela"][id]
-  end
-  
-  def size
-    return 0 if @entries.empty?
-    
-    size = 1
-    prev_end_time = 0
-    
-    @entries.each do |e|
-      if e.start_time < prev_end_time
-        e.row = 1
-        size = 2
-      end
-      prev_end_time = e.end_time
+class Prawn::Document::Box
+  def show(grid_color = "CCCCCC")
+    self.bounding_box do
+      original_stroke_color = pdf.stroke_color
+      pdf.stroke_color = grid_color
+      # pdf.text self.name
+      pdf.stroke_bounds
+      pdf.stroke_color = original_stroke_color
     end
-    
-    size
-  end
-
-  def sort!
-    @entries.sort! {|a,b| a.start_time <=> b.start_time }
-  end
-  
-  def inspect
-    "<Day id=#{id.inspect} entries=#{@entries.inspect}>"
-  end
-  
-  def method_missing(method_name, *args, &block)
-    entries.send(method_name, *args, &block)
   end
 end
 
-class Entry
-  attr_accessor :group_code, :course_code, :course_name, :type, :week,
-                :time, :building, :room, :lecturer, :row
-                
-  def initialize
-    @row = 0
-  end
-                
-  def start_time
-    @start_time ||= parse_time(time[:start])
-  end
-  
-  def end_time
-    @end_time ||= parse_time(time[:end])
-  end
-  
-  def inspect
-    "<Entry start_time=#{start_time.inspect} end_time=#{end_time.inspect}>"
-  end
-  
-  def time_string
-    "#{time[:start][:hour]}:#{time[:start][:min]} - #{time[:end][:hour]}:#{time[:end][:min]}"
-  end
-  
-  def type_code
-    {"Wykład" => "W", "Ćwiczenia" => "C", "Zajęcia laboratoryjne" => "L"}[type] || type
-  end
-  
-  def type_color
-    {"W" => "FDFF68", "C" => "F9285E", "L" => "00FFD5"}[type_code] || "FFFFFF"
-  end
-  
-  protected
-  
-  def parse_time(time)
-    time[:hour].to_i * 100 + time[:min].to_i
-  end
-end
-
-class EclParser
-  def self.generate!(html)
-    doc = new(html)
-    doc.parse!
-    doc.generate!
-  end
-  
-  def initialize(html)
-    @doc = Nokogiri::HTML(html)
-    @days = []
-    7.times {|i| @days[i] = Day.new(i) }
-  end
-  
-  def parse!
-    trs = @doc.css("table.KOLOROWA")[2].children
-    trs = trs[4, trs.size-1]
+class PdfGenerator
+  def self.generate!(schedule)
+    days = schedule.days
     
-    (0...(trs.size / 4)).each do |i|
-      k = 4*i
-      entry = Entry.new
-      
-      tds = trs[k].css("td")
-      entry.group_code = tds[0].content.strip
-      entry.course_code = tds[1].content.strip
-      entry.course_name = tds[2].content.strip
-      
-      tds = trs[k+2].css("td")
-      entry.lecturer = tds[0].content.strip
-      entry.type = tds[1].content.strip
-      
-      m = trs[k+3].css("table tr td").first.content.strip.match(/(.{2})(?:\/(T(?:P|N)?))? (\d{2}):(\d{2})-(\d{2}):(\d{2}), bud. (.+?), sala (.+)/u)
-      entry.week = m[2] || ""
-      entry.time = { :start => { :hour => m[3], :min => m[4] }, 
-                     :end => { :hour => m[5], :min => m[6] } }
-      entry.building = m[7]
-      entry.room = m[8]
-      
-      @days[day_id(m[1])] << entry
-      
-    end
-    
-    @days.each {|d| d.sort! }
-  end
-  
-  def day_id(day)
-    {"pn" => 0, "wt" => 1, "śr" => 2, "cz" => 3, "pt" => 4}[day]
-  end
-  
-  def generate!
-    days = @days
-
     Prawn::Document.new(:page_size => 'A4', :page_layout => :landscape) do
       def left(time)
         (time[:hour].to_i-7)*@hour_size + (time[:min].to_i / (60/@hour_size))
@@ -245,17 +124,5 @@ class EclParser
         row += ds
       end
     end.render
-  end
-end
-
-class Prawn::Document::Box
-  def show(grid_color = "CCCCCC")
-    self.bounding_box do
-      original_stroke_color = pdf.stroke_color
-      pdf.stroke_color = grid_color
-      # pdf.text self.name
-      pdf.stroke_bounds
-      pdf.stroke_color = original_stroke_color
-    end
   end
 end
