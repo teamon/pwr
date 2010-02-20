@@ -1,0 +1,171 @@
+html,body,div,span,h1,h2,p,a,strong,ul,li,fieldset,form,label {
+background:transparent;
+border:0;
+font-size:100%;
+margin:0;
+padding:0;
+vertical-align:baseline;
+}
+
+body {
+color:#222;
+font-family:'lucida grande', 'Segoe UI', arial, verdana, 'lucida sans unicode', tahoma, sans-serif;
+font-size:8pt;
+line-height:1;
+padding-top:20px;
+}
+
+h1,h2,strong,a {
+font-style:inherit;
+font-weight:inherit;
+text-decoration:none;
+}
+
+input,textarea {
+font:inherit;
+}
+
+input::-moz-focus-inner {
+border:0;
+margin:0;
+padding:0;
+}
+
+#container {
+margin:auto;
+width:600px;
+}
+
+#main {
+background-color:#f5f5f5;
+margin-bottom:20px;
+overflow:hidden;
+padding:10px 0;
+position:relative;
+}
+
+a {
+color:#1f75cc;
+}
+
+a:hover {
+text-decoration:underline;
+}
+
+strong {
+font-weight:700;
+}
+
+div.info {
+position:absolute;
+right:10px;
+top:15px;
+}
+
+h1 {
+color:#1f75cc;
+font-size:12pt;
+font-weight:700;
+padding:5px 0 15px 15px;
+}
+h2 {
+color:#1f75cc;
+font-size:10pt;
+font-weight:700;
+padding:5px 0 ;
+}
+
+h1 span {
+color:#aaa;
+font-size:6pt;
+}
+
+form {
+padding:20px;
+}
+
+fieldset label {
+float:left;
+padding:6px;
+text-align:right;
+width:100px;
+}
+
+fieldset textarea {
+border:1px solid #ccc;
+float:left;
+padding:3px;
+height:150px;
+width:550px;
+}
+
+form .actions {
+padding-bottom:10px;
+padding-top:10px;
+overflow:hidden;
+}
+
+form .actions input {
+-webkit-border-radius:4px;
+background-color:#4e4e4e;
+border:none;
+color:#f2f2f2;
+float:right;
+padding:5px 10px;
+}
+
+#foot {
+color:#aaa;
+font-size:8pt;
+padding:10px 15px;
+}
+
+#foot a {
+font-size:8pt;
+}
+
+#foot p.copy {
+float:right;
+text-align:right;
+width:150px;
+}
+
+#more {
+float:left;
+line-height:11pt;
+width:400px;
+}
+
+#more a {
+color:#bbb;
+}
+
+#more a:hover {
+color:#555;
+}
+
+#howto ul {
+line-height:15px;
+padding-left:20px;
+padding-right:200px;
+}
+
+#howto ul li {
+list-style:decimal;
+}
+
+div.radio {
+  float: left;
+  width: 400px;
+}
+
+div.radio label {
+	float: left;
+	padding: 4px 34px 4px 4px;
+}
+
+div.radio input {
+	float: left;
+}
+
+

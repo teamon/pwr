@@ -91,7 +91,7 @@ class PdfGenerator
           
           (grid [row+r+3, sl], [row+r+3, el]).bounding_box do
             text "\n", :size => 5
-            text "%s (%s)" % [entry.building, entry.room], :align => :center, :size => 8
+            text entry.location, :align => :center, :size => 8
           end
           
           (grid [row+r+4, sl], [row+r+4, el]).bounding_box do

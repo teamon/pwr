@@ -1,7 +1,7 @@
 require "date"
 
 class EclDate < Date
-  @semesters = {}
+  @semesters = Hash.new({})
   
   def self.apply(year, month, day, wday = nil, cweek = nil)
     date = new(year, month, day)
@@ -10,8 +10,8 @@ class EclDate < Date
     date
   end
   
-  def self.register(name, &block)
-    @semesters[name] = Semester.new(&block)
+  def self.register(year, semester, &block)
+    @semesters[year][semester] = Semester.new(&block)
   end
   
   def self.semesters

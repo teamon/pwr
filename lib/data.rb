@@ -4,26 +4,26 @@ end
 
 class Day
   attr_accessor :id, :entries
-  
+
   def initialize(id)
     @id = id
     @entries = []
   end
-  
+
   def <<(entry)
     @entries << entry
   end
-  
+
   def name
     ["Poniedziałek", "Wtorek", "środa", "Czwartek", "Piątek", "Sobota", "Niedziela"][id]
   end
-  
+
   def size
     return 0 if @entries.empty?
-    
+
     size = 1
     prev_end_time = 0
-    
+
     @entries.each do |e|
       if e.start_time < prev_end_time
         e.row = 1
@@ -49,8 +49,8 @@ class Day
 end
 
 class Entry
-  attr_accessor :group_code, :course_code, :course_name, :type, :week,
-                :time, :building, :room, :lecturer, :row
+  attr_accessor :group_code, :course_code, :course_name, :type, 
+                :week, :time, :building, :room, :lecturer, :row
                 
   def initialize
     @row = 0
@@ -64,8 +64,24 @@ class Entry
     @end_time ||= parse_time(time[:end])
   end
   
-  def inspect
-    "<Entry start_time=#{start_time.inspect} end_time=#{end_time.inspect}>"
+  def start_hour
+    time[:start][:hour].to_i
+  end
+  
+  def start_min
+    time[:start][:min].to_i
+  end
+  
+  def end_hour
+    time[:end][:hour].to_i
+  end
+  
+  def end_min
+    time[:end][:min].to_i
+  end
+  
+  def location
+    "#{building} / #{room}"
   end
   
   def time_string
@@ -78,6 +94,14 @@ class Entry
   
   def type_color
     {"W" => "FDFF68", "C" => "F9285E", "L" => "00FFD5"}[type_code] || "FFFFFF"
+  end
+  
+  def in_week?(n)
+    week == "" || week == ["TP", "TN"][n%2]
+  end
+  
+  def course_name_with_type
+    "#{course_name} (#{type_code})"
   end
   
   protected

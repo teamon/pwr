@@ -1,4 +1,4 @@
-EclDate.register("2009_2010_Zimowy") do
+EclDate.register("2009/2010", "Zimowy") do
   add D(2009, 10, 1)..D(2009, 11, 9)
   add D(2009, 11, 10, 3, 2)
   add D(2009, 11, 12)..D(2009, 12, 20)
