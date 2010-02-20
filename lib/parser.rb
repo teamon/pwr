@@ -23,7 +23,7 @@ class EclParser
 
     trs = @doc.css("table.KOLOROWA")[2].children
     p trs.size
-    trs = trs[4, trs.size-5]
+    trs = trs[4, trs.size-4]
     
     (0...(trs.size / 4)).each do |i|
       k = 4*i
