@@ -80,12 +80,13 @@ class PdfGenerator
             text entry.course_code, :align => :center, :size => 6
           end
           
-          (grid [row+r, sl], [row+r+1, el]).bounding_box do
+          (grid [row+r, sl], [row+r+2, el]).bounding_box do
             text "\n", :size => 10
             text entry.course_name, :align => :center, :size => 8
           end
           
-          (grid [row+r+2, sl], [row+r+2, el]).bounding_box do
+          (grid [row+r+2, sl], [row+r+3, el]).bounding_box do
+            text "\n", :size => 4
             text(entry.lecturer || "", :align => :center, :size => 6)
           end
           
