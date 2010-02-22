@@ -16,7 +16,7 @@ class ICalGenerator
           dtend   DateTime.civil(date.year, date.month, date.day, entry.end_hour, entry.end_min)
           summary entry.course_name_with_type
           description entry.lecturer + "\n" + entry.course_code
-          location "C-13 / 0.45"
+          location entry.location
         end
       end
     end
