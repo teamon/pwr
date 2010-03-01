@@ -89,7 +89,7 @@ class Entry
   end
   
   def type_code
-    {"Wykład" => "W", "Ćwiczenia" => "C", "Zajęcia laboratoryjne" => "L"}[type] || type
+    {"Wykład" => "W", "Ćwiczenia" => "C", "Zajęcia laboratoryjne" => "L", "Projekt" => "P"}[type] || type
   end
   
   def type_color
