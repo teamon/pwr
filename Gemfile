@@ -1,13 +1,13 @@
 source :gemcutter
 
-gem 'sinatra'
+gem 'sinatra', '0.9.4'
 
-gem 'nokogiri'
+gem 'nokogiri', '1.4.1'
 
-gem 'prawn'
-gem 'prawn-layout', :require => "prawn/layout"
+gem 'prawn', '0.7.2'
+gem 'prawn-layout', '0.7.2', :require => "prawn/layout"
 
-gem 'icalendar'
-gem 'vpim'
+gem 'icalendar', '1.1.0'
+gem 'vpim', '0.695'
 
-gem "rack-google_analytics", :require => "rack/google_analytics"
+gem "rack-google_analytics", '1.0.1', :require => "rack/google_analytics"
