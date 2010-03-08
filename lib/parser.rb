@@ -22,7 +22,6 @@ class EclParser
     schedule.semester = semester[1]
 
     trs = @doc.css("table.KOLOROWA")[2].children
-    p trs.size
     trs = trs[4, trs.size-4]
     
     (0...(trs.size / 4)).each do |i|

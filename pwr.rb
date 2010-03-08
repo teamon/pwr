@@ -6,6 +6,7 @@ require "lib/data"
 require "lib/parser"
 require "lib/pdf"
 require "lib/ical"
+require "lib/vcs"
 
 get "/" do
   erb :index
@@ -23,6 +24,9 @@ post "/plan" do
       when "ical"
         send_data ICalGenerator.generate!(schedule), :filename => "plan-pwr.ics", 
           :disposition => "attachment", :type => 'text/calendar'
+      when "vcs"
+        send_data VCSGenerator.generate!(schedule), :filename => "plan-pwr.vcs",
+          :disposition => "attachement", :type => 'text/X-vCalendar'
       else
         raise ArgumentError
       end

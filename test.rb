@@ -1,8 +1,9 @@
 require "rubygems"
 require "lib/data"
 require "lib/parser"
-require "lib/ical"
 require "lib/pdf"
+require "lib/ical"
+require "lib/vcs"
 
 days = EclParser.parse!(File.read(ARGV[1]))
 
@@ -15,4 +16,8 @@ when "ical"
   ical = ICalGenerator.generate!(days)
   File.open("test.ics", "wb") {|f| f.write ical }
   system("open test.ics")
+when "vcs"
+  cal = VCSGenerator.generate!(days)
+  File.open("test.vcs", "wb") {|f| f.write cal }
+  system("mate test.vcs")
 end
