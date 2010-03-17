@@ -1,0 +1,29 @@
+<h2>Generator planu</h2>
+<form action="/plan" method="post">
+  <fieldset>
+    <textarea name="data"></textarea>
+  </fieldset>
+  
+  <div class="actions">
+    <div class="radio">
+      <input type="radio" name="type" id="type_pdf" value="pdf" checked="checked"/>
+      <label for="type_pdf">PDF</label>
+      <input type="radio" name="type" id="type_ical" value="ical" />
+      <label for="type_ical">iCalendar</label>
+      <input type="radio" name="type" id="type_vcs" value="vcs" />
+      <label for="type_vcs">VCS</label>
+    </div>
+    
+    <input type="submit" class="submit" value="Generuj" />
+  </div>
+  
+  <div id="howto">
+    <h3>Instrukcja obsługi</h3>
+    <ul>
+      <li>Wbij na cwela (zaloguj się itp)</li>
+      <li>Kliknij zakładkę <strong>"Zapisy"</strong> (po lewej w menu)</li>
+      <li>Teraz klik na <strong>"Przełącz na &lt;Grupy zajęciowe do których słuchacz jest zapisany w semestrze&gt;"</strong></li>
+      <li>Skopiuj źródło strony i wklej w pole powyżej</li>
+    </ul>
+  </div>
+</form>

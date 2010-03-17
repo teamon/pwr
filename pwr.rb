@@ -7,9 +7,14 @@ require "lib/parser"
 require "lib/pdf"
 require "lib/ical"
 require "lib/vcs"
+require "lib/srednia"
 
 get "/" do
   erb :index
+end
+
+get "/plan" do
+  erb :plan
 end
 
 post "/plan" do
@@ -37,4 +42,23 @@ post "/plan" do
     p e
     "Error!. Skontaktuj sie z administratorem ;]"
   end
+end
+
+get "/srednia" do
+  erb :srednia
+end
+
+post "/srednia" do
+  begin
+    if params[:data]
+      @avg = EclParserS.parse!(params[:data])
+    else
+      "Error!"
+    end
+  rescue Exception => e
+    p e
+    "Error!. Skontaktuj sie z administratorem ;]"
+  end
+  
+  erb :srednia
 end
