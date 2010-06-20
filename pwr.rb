@@ -1,45 +1,42 @@
-# encoding: utf-8
+# coding: utf-8
 
-require "rubygems"
-require "sinatra"
-require "lib/data"
-require "lib/parser"
-require "lib/pdf"
-require "lib/pdfkit"
-require "lib/ical"
-require "lib/vcs"
-require "lib/srednia"
+require 'sinatra'
+require "haml"
+require 'nokogiri'
+require "pdfkit"
+require 'icalendar'
+require 'vpim'
+
+Dir[File.dirname(__FILE__) + "/lib/**/*.rb"].each {|f| require f }
+Dir[File.dirname(__FILE__) + "/semesters/*.rb"].each {|f| require f }
 
 get "/" do
-  erb :index
+  haml :index
 end
 
 get "/plan" do
-  erb :plan
+  haml :plan
 end
 
 post "/plan" do
+  p params
   begin
     if params[:data]
-      schedule = EclParser.parse!(params[:data])
+      schedule = EclParser::Plan.parse!(params[:data])
       
       case params[:type]
       when "pdf"
         content_type "application/pdf"
         attachment "plan-pwr.pdf"
-        PdfGenerator.generate!(schedule)
-      when "pdfkit"
-        content_type "application/pdf"
-        attachment "plan-pwr-pdfkit.pdf"
-        PdfKitGenerator.generate!(schedule)
+        PlanGenerator::PDF.generate!(schedule)
       when "ical"
-        content_type 'text/calendar'
-        attachment "plan-pwr.ics"
-        ICalGenerator.generate!(schedule)
+        content_type 'text/plain'
+        # attachment "plan-pwr.ics"
+        PlanGenerator::ICal.generate!(schedule)
       when "vcs"
         content_type 'text/X-vCalendar'
         attachment "plan-pwr.vcs"
-        VCSGenerator.generate!(schedule)
+        PlanGenerator::VCS.generate!(schedule)
       else
         raise ArgumentError
       end
@@ -47,26 +44,31 @@ post "/plan" do
       "Error!"
     end
   rescue Exception => e
-    p e
+    content_type 'text/plain'
+    puts e.message
+    puts e.backtrace
     "Error!. Skontaktuj sie z administratorem ;]"
   end
 end
 
 get "/srednia" do
-  erb :srednia
+  haml :srednia
 end
 
 post "/srednia" do
   begin
     if params[:data]
-      @avg = EclParserS.parse!(params[:data])
+      @avg = EclParser::Avg.parse!(params[:data])
     else
-      "Error!"
+      redirect "/srednia"
     end
   rescue Exception => e
     p e
     "Error!. Skontaktuj sie z administratorem ;]"
   end
   
-  erb :srednia
+  puts "".encoding
+  
+  content_type :html, :charset => 'utf-8'
+  haml :srednia
 end
