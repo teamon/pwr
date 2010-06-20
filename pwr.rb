@@ -57,9 +57,11 @@ post "/plan" do
         raise ArgumentError
       end
     else
-      "Error!"
+      redirect "/error"
     end
   rescue Exception => e
+    puts e.message
+    puts e.backtrace
     redirect "/error"
   end
 end
@@ -76,6 +78,8 @@ post "/srednia" do
       redirect "/srednia"
     end
   rescue Exception => e
+    puts e.message
+    puts e.backtrace
     redirect "/error"
   end
     
