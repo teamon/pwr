@@ -177,7 +177,7 @@ div.radio {
 
 div.radio label {
 	float: left;
-	padding: 4px 34px 4px 4px;
+	padding: 4px 17px 4px 4px;
 }
 
 div.radio input {
@@ -235,4 +235,11 @@ background-color:#4e4e4e;
 border:none;
 color:#f2f2f2;
 padding:5px 10px;
+}
+
+.error {
+  padding: 15px;
+}
+.error ul {
+  padding-bottom: 10px;
 }

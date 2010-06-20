@@ -1,0 +1,147 @@
+!!! Strict
+%html{:lang => "pl_PL", "xml:lang" => "pl_PL", :xmlns => "http://www.w3.org/1999/xhtml"}
+  %head
+    %title plan
+    %meta{:content => "text/html; charset=utf-8", "http-equiv" => "content-type"}/
+    :css
+      html,body,div,span,h1,h2,p,a,strong,ul,li,fieldset,form,label {
+        background:transparent;
+        border:0;
+        font-size:100%;
+        margin:0;
+        padding:0;
+        vertical-align:baseline;
+      }
+
+      body {
+        color:#222;
+        font-family:'lucida grande', 'Segoe UI', arial, verdana, 'lucida sans unicode', tahoma, sans-serif;
+        font-size:8pt;
+      }
+
+      strong {
+        font-weight:700;
+      }
+      
+      #container {
+        width: 820px;
+      }
+
+      #hours {
+        overflow: hidden;
+        border-bottom: 1px solid #888;
+        width: 800px;
+        padding-left: 20px;
+        border-right: 1px solid #888;
+      }
+      
+      #hours span {
+        border-left: 1px solid #888;
+        display: block;
+        float:left;
+        width: #{800/HOURS.size-1}px;
+        height: 15px;
+        text-align:center;
+        line-height: 15px;
+      }
+      
+      #copy {
+        text-align: right;
+        font-size: 7pt;
+        padding-top:10px;
+      }
+      
+      .day {
+        position: relative;
+        width: 820px;
+        border-bottom: 1px solid #888;
+        border-right: 1px solid #888;
+      }
+      
+      .day_name {
+        text-align: center;
+        position: absolute;
+        -webkit-transform: rotate(-90deg);
+        height: 20px;
+        line-height: 20px;
+        border-bottom: 1px solid #888
+      }
+      
+      .entry {
+        position: absolute;
+        height: #{@day_size.to_i}px;
+        background: #f0f0f0;
+        text-align: center;
+        font-size: 6pt;
+        line-height: 6pt;
+        border-left: 1px solid #888;
+        border-right: 1px solid #888;
+        border-bottom: 1px solid #888;
+      }
+      
+      
+      .entry .code {
+        height: #{s = (@day_size/6).to_i}px;
+        line-height: #{s}px;
+        font-size: 5pt;
+        line-height: 6pt;
+      }
+      
+      .entry .name {
+        height: #{2*s}px;
+      }
+      
+      .entry .lecturer {
+        height: #{s}px;
+        line-height: #{s}px;
+        font-size: 5pt;
+        line-height: 5pt;
+      }
+      
+      .entry .location {
+        height: #{s}px;
+        line-height: #{s}px;
+      }
+      
+      .entry .bottom {
+        height: #{s}px;
+        line-height: #{s}px;
+      }
+      
+      .entry .week {
+        float: left;
+        min-height: 1px;
+      }
+      
+      .entry .time {
+        float: left;
+        min-height: 1px;
+      }
+      
+      .entry .type {
+        float: right;
+        min-height: 1px;
+      }
+
+  %body
+    #container
+      #hours
+        - HOURS.each do |hour|
+          %span= "%02d:00" % hour
+      #days
+        - @days.each do |day|
+          - ds = (day.size*@day_size).to_i
+          .day{:style => "height: #{ds}px"}
+            .day_name{:style => "width: #{ds}px; left: -#{ds/2-10}px; top: #{ds/2-10}px"}= day.name
+            - day.each do |entry|
+              .entry{:style => "left: #{entry_pos_left(entry.time[:start])+20}px; width: #{ew = entry_width(entry)}px; top: #{entry.row*(@day_size+1)}px"}
+                .code= entry.course_code
+                .name= entry.course_name
+                .lecturer= entry.lecturer
+                .location= entry.location
+                .bottom{:style => "background: ##{entry.type_color}"}
+                  .week{:style => "width: #{ew/4}px"}= entry.week
+                  .time{:style => "width: #{ew/2}px"}= entry.time_string
+                  .type{:style => "width: #{ew/4}px"}= entry.type_code
+      #copy
+        Plan wygenerowany przez http://pwr.heroku.com | http://teamon.eu 2010
