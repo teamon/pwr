@@ -26,6 +26,9 @@ post "/plan" do
       when "pdf"
         send_data PdfGenerator.generate!(schedule), :filename => "plan-pwr.pdf", 
           :disposition => "attachment", :type => 'application/pdf'
+      when "pdfkit"
+        send_data PdfKitGenerator.generate!(schedule), :filename => "plan-pwr-pdfkit.pdf", 
+          :disposition => "attachment", :type => 'application/pdf'
       when "ical"
         send_data ICalGenerator.generate!(schedule), :filename => "plan-pwr.ics", 
           :disposition => "attachment", :type => 'text/calendar'

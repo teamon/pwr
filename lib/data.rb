@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class Schedule
   attr_accessor :days, :year, :semester
 end
