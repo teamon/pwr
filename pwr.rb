@@ -5,6 +5,7 @@ require "sinatra"
 require "lib/data"
 require "lib/parser"
 require "lib/pdf"
+require "lib/pdfkit"
 require "lib/ical"
 require "lib/vcs"
 require "lib/srednia"
@@ -24,17 +25,21 @@ post "/plan" do
       
       case params[:type]
       when "pdf"
-        send_data PdfGenerator.generate!(schedule), :filename => "plan-pwr.pdf", 
-          :disposition => "attachment", :type => 'application/pdf'
+        content_type "application/pdf"
+        attachment "plan-pwr.pdf"
+        PdfGenerator.generate!(schedule)
       when "pdfkit"
-        send_data PdfKitGenerator.generate!(schedule), :filename => "plan-pwr-pdfkit.pdf", 
-          :disposition => "attachment", :type => 'application/pdf'
+        content_type "application/pdf"
+        attachment "plan-pwr-pdfkit.pdf"
+        PdfKitGenerator.generate!(schedule)
       when "ical"
-        send_data ICalGenerator.generate!(schedule), :filename => "plan-pwr.ics", 
-          :disposition => "attachment", :type => 'text/calendar'
+        content_type 'text/calendar'
+        attachment "plan-pwr.ics"
+        ICalGenerator.generate!(schedule)
       when "vcs"
-        send_data VCSGenerator.generate!(schedule), :filename => "plan-pwr.vcs",
-          :disposition => "attachement", :type => 'text/X-vCalendar'
+        content_type 'text/X-vCalendar'
+        attachment "plan-pwr.vcs"
+        VCSGenerator.generate!(schedule)
       else
         raise ArgumentError
       end

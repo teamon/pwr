@@ -1,7 +1,7 @@
 source :gemcutter
 
 gem "rack", "1.1.0"
-gem 'sinatra', '0.9.4'
+gem 'sinatra', '1.0'
 
 gem 'nokogiri', '1.4.1'
 
