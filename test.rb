@@ -20,6 +20,11 @@ when "pdfkit"
   pdf = PlanGenerator::PDFKit.generate!(days)
   File.open("test.pdf", "wb") {|f| f.write pdf }
   system("open test.pdf")
+when "html"
+  days = EclParser::Plan.parse!(File.read(ARGV[1]))
+  html = PlanGenerator::HTML.generate!(days)
+  File.open("test.html", "wb") {|f| f.write html }
+  system("open test.html")
 when "ical"
   days = EclParser::Plan.parse!(File.read(ARGV[1]))
   ical = PlanGenerator::ICal.generate!(days)
@@ -37,7 +42,7 @@ when "pdf-all"
     Dir["*.html"].each do |file|
       puts file
       days = EclParser::Plan.parse!(File.read(file))
-      pdf = PlanGenerator::PDF.generate!(days)
+      pdf = PlanGenerator::PDFKit.generate!(days)
       File.open("#{file}.pdf", "wb") {|f| f.write pdf }
       system("open #{file}.pdf")
     end
