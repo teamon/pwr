@@ -27,24 +27,6 @@
         / width: 820px;
       }
 
-      #hours {
-        overflow: hidden;
-        border-bottom: 1px solid #888;
-        padding-left: 5%;
-      }
-      
-      .hour {
-        float:left;
-        width: 6.67%;
-      }
-      
-      .hour span {
-        border-left: 1px solid #888;
-        height: 15px;
-        text-align:center;
-        line-height: 15px;
-        display: block;
-      }
       
       #copy {
         text-align: right;
@@ -52,51 +34,8 @@
         padding-top:10px;
         padding-right: 20px
       }
-      
-      #days { 
-        height: 400px;
-      }
-      
-      
 
-      
-      .day {
-        width: 100%;
-        border-bottom: 1px solid #888;
-        background-color: #ccc;
-      }
-      
-      .entries {
-        position: relative;
-        margin-left: 5%;
-      }
-      
-      .day_name {
-        text-align: center;
-        position: absolute;
-        height: 20px;
-        line-height: 20px;
-       # -webkit-transform: rotate(-90deg);
-        # -webkit-transform-origin: 50% 50%;
-        background: #f90;
-      }
-      
-      .entry {
-        position: absolute;
-        height: 100%;
-      }
-      
-      .entry .e {      
-        background: #f0f0f0;
-        text-align: center;
-        font-size: 6pt;
-        line-height: 6pt;
-        border-left: 1px solid #888;
-        border-right: 1px solid #888;
-        border-bottom: 1px solid #888;
-        height: 100%;
-      }
-      
+
       .code {
         height: 15%;
         line-height: 9pt;
@@ -141,28 +80,69 @@
         height: 100%;
       }
       
+      
+      #main {
+        width: 100%;
+        border-collapse: collapse;
+        cellspacing: 0;
+        cellpadding: 0;
+      }
+      
+      td {
+        border: 1px solid #ccc;
+        padding:0;
+        margin: 0;
+      }
+      
+      td.hour {
+        text-align: center;
+        width: 100px
+      }
+      
+      td.entry {
+        text-align: center;
+        height: 100px;
+      }
+      
   %body
     #container
-      #hours
-        - HOURS.each do |hour|
-          .hour
-            %span= "%02d:00" % hour
-      #days
+      %table#main
+        %tr#hours
+          - HOURS.each do |hour|
+            %td.hour{:colspan => 12}= "%02d:00" % hour
         - @days.each do |day|
-          - ds = (day.size*100/@row_count)
-          .day{:style => "height: #{ds}%"}
-            / .day_name{:style => "width: 100px; left: 0; top: 50%"}= day.name
-            .entries{:style => "height: 100%"}
-              - day.each do |entry|
-                .entry{:style => "top: #{entry.row*100/day.size}%; left: #{entry_pos_left(entry.time[:start])}%; width: #{entry_width(entry)}%; height: #{100/day.size}%"}
-                  .e
-                    .code= entry.course_code
-                    .name= entry.course_name
-                    .lecturer= entry.lecturer
-                    .location= entry.location
-                    .bottom{:style => "background: ##{entry.type_color}"}
-                      .week= entry.week
-                      .time= entry.time_string
-                      .type= entry.type_code
+          - day.size.times do |row|
+            %tr
+              - last = 0
+              - day.entries.select {|e| e.row == row}.each do |entry|
+                %td{:colspan => (el=entry_left(entry))-last}
+                %td.entry{:colspan => ew=entry_width(entry)}
+                  .code= entry.course_code
+                  .name= entry.course_name
+                  .lecturer= entry.lecturer
+                  .location= entry.location
+                  .bottom{:style => "background: ##{entry.type_color}"}
+                    .week= entry.week
+                    .time= entry.time_string
+                    .type= entry.type_code
+                - last = el+ew
+              - if (c = 180-last) > 0
+                %td{:colspan => c}
+          
+          / - ds = (day.size*100/@row_count)
+          / .day{:style => "height: #{ds}%"}
+          /   / .day_name{:style => "width: 100px; left: 0; top: 50%"}= day.name
+          /   .entries{:style => "height: 100%"}
+          /     - day.each do |entry|
+          /       .entry{:style => "top: #{entry.row*100/day.size}%; left: #{entry_pos_left(entry.time[:start])}%; width: #{entry_width(entry)}%; height: #{100/day.size}%"}
+          /         .e
+          /           .code= entry.course_code
+          /           .name= entry.course_name
+          /           .lecturer= entry.lecturer
+          /           .location= entry.location
+          /           .bottom{:style => "background: ##{entry.type_color}"}
+          /             .week= entry.week
+          /             .time= entry.time_string
+          /             .type= entry.type_code
       #copy
         Plan wygenerowany przez http://pwr.heroku.com | http://teamon.eu 2010

@@ -24,16 +24,16 @@ module PlanGenerator
     
     protected
     
-    def entry_pos_left(time)
-      100 * time_size(time) / (HOURS.size*60.0)
+    def entry_left(entry)
+      time_size(entry.time[:start])
     end
     
     def entry_width(entry)
-      100 * (time_size(entry.time[:end]) - time_size(entry.time[:start])) / (HOURS.size*60.0)
+      time_size(entry.time[:end]) - time_size(entry.time[:start])
     end  
     
     def time_size(time)
-      (time[:hour].to_i-HOURS.first)*60 + time[:min].to_i
+      ((time[:hour].to_i-HOURS.first)*60 + time[:min].to_i) / 5
     end  
   end
 end
