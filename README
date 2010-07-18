@@ -1,7 +1,11 @@
 
 
 CHANGELOG
+ * 0.3.1  - poprawa działania pdfkit
+
  * 0.3.0  - wymiana erb na haml
           - wymiana prawn na pdfkit
           
  * 0.2.0  - dodany kalkulator średniej
+ 
+ * 0.1.0  - pierwsze podejście
