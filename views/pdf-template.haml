@@ -29,16 +29,16 @@
 
       
       #copy {
-        text-align: right;
-        font-size: 7pt;
+        text-align: center;
         padding-top:10px;
-        padding-right: 20px
+        padding-bottom: 10px;
       }
 
 
       .code {
         height: 15%;
         line-height: 9pt;
+        / background: yellow
       }
       
       .name {
@@ -46,46 +46,55 @@
         padding: 0 5px;
         line-height: 7pt;
         font-weight: bold;
+        / background: orange
       }
       
       .lecturer {
         height: 20%;
         line-height: 7pt;
+        / background: yellow
       }
       
       .location {
         height: 15%;
+        / background: orange
       }
       
       .bottom {
         height: 20%;
         line-height: 15pt;
+        overflow:hidden
+        / background: yellow
       }
       
       .week {
         float: left;
         width: 15%;
         height: 100%;
+        / background: red
       }
       
       .time {
         float: left;
         width: 70%;
         height: 100%;
+        / background: green
       }
       
       .type {
         float: left;
         width: 15%;
         height: 100%;
+        / background: blue
       }
       
       
       #main {
-        width: 100%;
+        width: 1080px;
         border-collapse: collapse;
         cellspacing: 0;
         cellpadding: 0;
+        border-right: 1px solid #ccc;
       }
       
       td {
@@ -94,55 +103,102 @@
         margin: 0;
       }
       
-      td.hour {
-        text-align: center;
-        width: 100px
+      .hour {
+        width: 100px !important
       }
       
-      td.entry {
+      #hours {
+        overflow: hidden;
+        border-bottom: 1px solid #ccc;
+        border-top: 1px solid #ccc;
+      }
+      
+      .entry {
+        float:left;
         text-align: center;
+        background: #f0f0f0;
+      }
+      
+      .break {
+        float: left;
         height: 100px;
       }
       
+      .h {
+        float: left;
+        width: 69px;
+        height: 20px;
+        line-height: 20px;
+        border-left: 1px solid #ccc;
+        padding-left: 2px;
+      }
+      
+      .row {
+        overflow: hidden;
+        border-bottom: 1px solid #ccc;
+        background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEgAAAAGCAIAAADv3U8MAAAC7mlDQ1BJQ0MgUHJvZmlsZQAAeAGFVM9rE0EU/jZuqdAiCFprDrJ4kCJJWatoRdQ2/RFiawzbH7ZFkGQzSdZuNuvuJrWliOTi0SreRe2hB/+AHnrwZC9KhVpFKN6rKGKhFy3xzW5MtqXqwM5+8943731vdt8ADXLSNPWABOQNx1KiEWlsfEJq/IgAjqIJQTQlVdvsTiQGQYNz+Xvn2HoPgVtWw3v7d7J3rZrStpoHhP1A4Eea2Sqw7xdxClkSAog836Epx3QI3+PY8uyPOU55eMG1Dys9xFkifEA1Lc5/TbhTzSXTQINIOJT1cVI+nNeLlNcdB2luZsbIEL1PkKa7zO6rYqGcTvYOkL2d9H5Os94+wiHCCxmtP0a4jZ71jNU/4mHhpObEhj0cGDX0+GAVtxqp+DXCFF8QTSeiVHHZLg3xmK79VvJKgnCQOMpkYYBzWkhP10xu+LqHBX0m1xOv4ndWUeF5jxNn3tTd70XaAq8wDh0MGgyaDUhQEEUEYZiwUECGPBoxNLJyPyOrBhuTezJ1JGq7dGJEsUF7Ntw9t1Gk3Tz+KCJxlEO1CJL8Qf4qr8lP5Xn5y1yw2Fb3lK2bmrry4DvF5Zm5Gh7X08jjc01efJXUdpNXR5aseXq8muwaP+xXlzHmgjWPxHOw+/EtX5XMlymMFMXjVfPqS4R1WjE3359sfzs94i7PLrXWc62JizdWm5dn/WpI++6qvJPmVflPXvXx/GfNxGPiKTEmdornIYmXxS7xkthLqwviYG3HCJ2VhinSbZH6JNVgYJq89S9dP1t4vUZ/DPVRlBnM0lSJ93/CKmQ0nbkOb/qP28f8F+T3iuefKAIvbODImbptU3HvEKFlpW5zrgIXv9F98LZua6N+OPwEWDyrFq1SNZ8gvAEcdod6HugpmNOWls05Uocsn5O66cpiUsxQ20NSUtcl12VLFrOZVWLpdtiZ0x1uHKE5QvfEp0plk/qv8RGw/bBS+fmsUtl+ThrWgZf6b8C8/UXAeIuJAAAACXBIWXMAAAsTAAALEwEAmpwYAAAALElEQVQ4EWM4c+bMf3oBetrFCPQUw3AETMPRUyA/MZ09e3ZY+m00KQ61aAUAXmbeYKkxPI8AAAAASUVORK5CYII=")
+      }
+      
+      .day {
+        position: relative;
+      }
+      
+      .day_name {
+        width: 20px;
+        height: 70px;
+        position: absolute;
+        bottom:10px;
+        left: 0;
+        background-image: url("data:image/png;base64,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");
+      }
+      
+      
+      .day_name_0 { background-position: 0 70px; }
+      .day_name_1 { background-position: 0 140px; }
+      .day_name_2 { background-position: 0 210px; }
+      .day_name_3 { background-position: 0 280px; }
+      .day_name_4 { background-position: 0 350px; }
+      .day_name_5 { background-position: 0 420px; }
+      .day_name_6 { background-position: 0 0; }
+
+      .day_3 .entry {  }
+      .day_3 .entry .e { overflow:hidden; 
+      border-left: 1px solid #ccc; 
+      border-right: 1px solid #ccc }
+      
+      .day_3 .entry .code { height: 15px; line-height: 15px; }
+      .day_3 .entry .name { height: 35px; line-height: 12px; }
+      .day_3 .entry .lecturer { height: 35px; line-height: 12px; }
+      .day_3 .entry .location { height: 15px; line-height: 20px; }
+      .day_3 .entry .bottom { height: 20px; line-height: 20px; margin-top: 5px}
+      
   %body
     #container
-      %table#main
-        %tr#hours
+      #main{:class => "day_3"}
+        #hours
           - HOURS.each do |hour|
-            %td.hour{:colspan => 12}= "%02d:00" % hour
+            .h{:colspan => 12}= "%02d:00" % hour
         - @days.each do |day|
-          - day.size.times do |row|
-            %tr
-              - last = 0
-              - day.entries.select {|e| e.row == row}.each do |entry|
-                %td{:colspan => (el=entry_left(entry))-last}
-                %td.entry{:colspan => ew=entry_width(entry)}
-                  .code= entry.course_code
-                  .name= entry.course_name
-                  .lecturer= entry.lecturer
-                  .location= entry.location
-                  .bottom{:style => "background: ##{entry.type_color}"}
-                    .week= entry.week
-                    .time= entry.time_string
-                    .type= entry.type_code
-                - last = el+ew
-              - if (c = 180-last) > 0
-                %td{:colspan => c}
-          
-          / - ds = (day.size*100/@row_count)
-          / .day{:style => "height: #{ds}%"}
-          /   / .day_name{:style => "width: 100px; left: 0; top: 50%"}= day.name
-          /   .entries{:style => "height: 100%"}
-          /     - day.each do |entry|
-          /       .entry{:style => "top: #{entry.row*100/day.size}%; left: #{entry_pos_left(entry.time[:start])}%; width: #{entry_width(entry)}%; height: #{100/day.size}%"}
-          /         .e
-          /           .code= entry.course_code
-          /           .name= entry.course_name
-          /           .lecturer= entry.lecturer
-          /           .location= entry.location
-          /           .bottom{:style => "background: ##{entry.type_color}"}
-          /             .week= entry.week
-          /             .time= entry.time_string
-          /             .type= entry.type_code
+          .day
+            .day_name{:class => "day_name_#{day.id}"}
+            - day.size.times do |row|
+              .row
+                - last = 0
+                - day.entries.select {|e| e.row == row}.each do |entry|
+                  .break{:style => "width:#{((el=entry_left(entry))-last)}px"}
+                  .entry{:style => "width: #{ew=entry_width(entry)}px"}
+                    .e
+                      .code= entry.course_code
+                      .name= entry.course_name
+                      .lecturer= entry.lecturer
+                      .location= entry.location
+                      .bottom{:style => "background: ##{entry.type_color}"}
+                        .week= entry.week
+                        .time= entry.time_string
+                        .type= entry.type_code
+                  - last = el+ew
+                - if (c = 180-last) > 0
+                  .break{:colspan => c}
+
       #copy
         Plan wygenerowany przez http://pwr.heroku.com | http://teamon.eu 2010

@@ -96,7 +96,8 @@ class Entry
   end
   
   def type_color
-    {"W" => "FDFF68", "C" => "F9285E", "L" => "00FFD5"}[type_code] || "FFFFFF"
+    {"W" => "ecdf92", "C" => "ff4283", "L" => "b0e35d", 
+      "S" => "ffa645", "P" => "bf9bf8"}[type_code] || "FFFFFF"
   end
   
   def in_week?(n)

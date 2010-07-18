@@ -33,7 +33,7 @@ module PlanGenerator
     end  
     
     def time_size(time)
-      ((time[:hour].to_i-HOURS.first)*60 + time[:min].to_i) / 5
+      ((time[:hour].to_i-HOURS.first)*60 + time[:min].to_i) * 1.2
     end  
   end
 end
