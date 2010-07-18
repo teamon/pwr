@@ -10,7 +10,7 @@ Dir[File.dirname(__FILE__) + "/lib/**/*.rb"].each {|f| require f }
 Dir[File.dirname(__FILE__) + "/semesters/*.rb"].each {|f| require f }
 
 PDFKit.configure do |config|
-  config.wkhtmltopdf = File.join(File.dirname(__FILE__), 'bin')
+  config.wkhtmltopdf = File.join(File.dirname(__FILE__), 'bin', 'wkhtmltopdf-0.9.9-OS-X.i368')
 end
 
 case ARGV[0]

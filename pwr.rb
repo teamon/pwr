@@ -14,10 +14,10 @@ require "prawn/layout"
 
 Dir[File.dirname(__FILE__) + "/lib/**/*.rb"].each {|f| require f }
 Dir[File.dirname(__FILE__) + "/semesters/*.rb"].each {|f| require f }
-# 
-# PDFKit.configure do |config|
-#   config.wkhtmltopdf = File.join(File.dirname(__FILE__), 'bin')
-# end
+
+PDFKit.configure do |config|
+  config.wkhtmltopdf = File.join(File.dirname(__FILE__), 'bin', 'wkhtmltopdf-i386')
+end
 
 get "/" do
   haml :index
