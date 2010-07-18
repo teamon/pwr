@@ -9,7 +9,7 @@ gem 'nokogiri', '1.4.1'
 gem 'prawn', '0.7.2'
 gem 'prawn-layout', '0.7.2', :require => "prawn/layout"
 
-gem "pdfkit", "0.3.3"
+gem "pdfkit", "0.4.0"
 gem 'icalendar', '1.1.4'
 gem 'vpim', '0.695'
 

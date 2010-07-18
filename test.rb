@@ -9,6 +9,10 @@ require "haml"
 Dir[File.dirname(__FILE__) + "/lib/**/*.rb"].each {|f| require f }
 Dir[File.dirname(__FILE__) + "/semesters/*.rb"].each {|f| require f }
 
+PDFKit.configure do |config|
+  config.wkhtmltopdf = File.join(File.dirname(__FILE__), 'bin')
+end
+
 case ARGV[0]
 when "pdf"
   days = EclParser::Plan.parse!(File.read(ARGV[1]))
