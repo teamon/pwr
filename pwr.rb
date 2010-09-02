@@ -1,7 +1,9 @@
 # coding: utf-8
 
-Encoding.default_internal = "utf-8"
-Encoding.default_external = "utf-8"
+if defined?(Encoding)
+  Encoding.default_internal = "utf-8"
+  Encoding.default_external = "utf-8"
+end
 
 require 'sinatra'
 require "haml"
