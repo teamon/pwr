@@ -38,8 +38,6 @@ get "/plan" do
 end
 
 post "/plan" do
-  puts "kurwa mac"
-  p params
   begin
     if params[:data]
       schedule = EclParser::Plan.parse!(params[:data])
@@ -69,11 +67,9 @@ post "/plan" do
         raise ArgumentError
       end
     else
-      puts "dupa"
       redirect "/error"
     end
   rescue Exception => e
-    raise e
     puts e.message
     puts e.backtrace
     redirect "/error"
