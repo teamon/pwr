@@ -62,4 +62,6 @@ $(document).ready(function(){
 		$(this).remove()
 	})
 	calculate()
+	
+	$("#examples a").fancybox();
 })

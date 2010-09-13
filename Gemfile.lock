@@ -1,0 +1,41 @@
+GEM
+  remote: http://rubygems.org/
+  specs:
+    daemons (1.1.0)
+    eventmachine (0.12.10)
+    haml (3.0.18)
+    icalendar (1.1.5)
+    nokogiri (1.4.3.1)
+    pdfkit (0.4.6)
+    prawn (0.7.2)
+      prawn-core (>= 0.7.2, < 0.8)
+      prawn-layout (>= 0.7.2, < 0.8)
+      prawn-security (>= 0.7.1, < 0.8)
+    prawn-core (0.7.2)
+    prawn-layout (0.7.2)
+    prawn-security (0.7.1)
+    rack (1.2.1)
+    rack-google_analytics (1.0.1)
+    sinatra (1.0)
+      rack (>= 1.0)
+    thin (1.2.7)
+      daemons (>= 1.0.9)
+      eventmachine (>= 0.12.6)
+      rack (>= 1.0.0)
+    vpim (0.695)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  haml (= 3.0.18)
+  icalendar (= 1.1.5)
+  nokogiri (= 1.4.3.1)
+  pdfkit (= 0.4.6)
+  prawn (= 0.7.2)
+  prawn-layout (= 0.7.2)
+  rack (= 1.2.1)
+  rack-google_analytics (= 1.0.1)
+  sinatra (= 1.0)
+  thin
+  vpim (= 0.695)

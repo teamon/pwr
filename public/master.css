@@ -243,3 +243,17 @@ padding:5px 10px;
 .error ul {
   padding-bottom: 10px;
 }
+#examples {
+	padding-bottom: 15px;
+	overflow: hidden;
+}
+#examples a {
+	display: block;
+	width: 250px;
+	height: 150px;
+	float: left;
+	border: 5px solid #ddd;
+}
+#examples a.first {
+	margin-right: 40px;
+}

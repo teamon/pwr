@@ -18,7 +18,11 @@ Dir[File.dirname(__FILE__) + "/lib/**/*.rb"].each {|f| require f }
 Dir[File.dirname(__FILE__) + "/semesters/*.rb"].each {|f| require f }
 
 PDFKit.configure do |config|
-  config.wkhtmltopdf = File.join(File.dirname(__FILE__), 'bin', 'wkhtmltopdf-amd64')
+  if RUBY_PLATFORM =~ /darwin/
+    config.wkhtmltopdf = File.join(File.dirname(__FILE__), 'bin', 'wkhtmltopdf-0.9.9-OS-X.i368')
+  else  
+    config.wkhtmltopdf = File.join(File.dirname(__FILE__), 'bin', 'wkhtmltopdf-amd64')
+  end
 end
 
 get "/" do
@@ -34,6 +38,8 @@ get "/plan" do
 end
 
 post "/plan" do
+  puts "kurwa mac"
+  p params
   begin
     if params[:data]
       schedule = EclParser::Plan.parse!(params[:data])
@@ -63,9 +69,11 @@ post "/plan" do
         raise ArgumentError
       end
     else
+      puts "dupa"
       redirect "/error"
     end
   rescue Exception => e
+    raise e
     puts e.message
     puts e.backtrace
     redirect "/error"
