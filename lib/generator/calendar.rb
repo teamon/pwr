@@ -13,22 +13,21 @@ module PlanGenerator
   
   
   class ICal < Calendar
-    include Icalendar
     
     def self.generate!(schedule)
-      cal = Calendar.new
-      
-      each_entry(schedule) do |date, entry|
-        cal.event do
-          dtstart DateTime.civil(date.year, date.month, date.day, entry.start_hour, entry.start_min)
-          dtend   DateTime.civil(date.year, date.month, date.day, entry.end_hour, entry.end_min)
-          summary entry.course_name_with_type
-          description entry.lecturer + "\n" + entry.course_code
-          location entry.location
+      cal = RiCal.Calendar do |c|
+        each_entry(schedule) do |date, entry|
+          c.event do
+            dtstart DateTime.civil(date.year, date.month, date.day, entry.start_hour, entry.start_min)
+            dtend   DateTime.civil(date.year, date.month, date.day, entry.end_hour, entry.end_min)
+            summary entry.course_name_with_type
+            description entry.lecturer + "\n" + entry.course_code
+            location entry.location
+          end
         end
       end
 
-      cal.to_ical
+      cal.to_s
     end
   end
   

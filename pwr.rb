@@ -9,7 +9,7 @@ require 'sinatra'
 require "haml"
 require 'nokogiri'
 require "pdfkit"
-require 'icalendar'
+require 'ri_cal'
 require 'vpim'
 require "prawn"
 require "prawn/layout"

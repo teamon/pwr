@@ -11,7 +11,7 @@ gem 'prawn', '0.7.2'
 gem 'prawn-layout', '0.7.2', :require => "prawn/layout"
 
 gem "pdfkit", "0.4.6"
-gem 'icalendar', '1.1.5'
+gem 'ri_cal', '0.8.7'
 gem 'vpim', '0.695'
 
 gem "rack-google_analytics", '1.0.1', :require => "rack/google_analytics"
