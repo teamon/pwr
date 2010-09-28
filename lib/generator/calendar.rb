@@ -18,8 +18,8 @@ module PlanGenerator
       cal = RiCal.Calendar do |c|
         each_entry(schedule) do |date, entry|
           c.event do
-            dtstart DateTime.civil(date.year, date.month, date.day, entry.start_hour, entry.start_min)
-            dtend   DateTime.civil(date.year, date.month, date.day, entry.end_hour, entry.end_min)
+            dtstart ([date.year, "%02d" % date.month, "%02d" % date.day, "T", "%02d" % entry.start_hour, "%02d" % entry.start_min, "00"].join)
+            dtend   ([date.year, "%02d" % date.month, "%02d" % date.day, "T", "%02d" % entry.end_hour, "%02d" % entry.end_min, "00"].join)
             summary entry.course_name_with_type
             description entry.lecturer + "\n" + entry.course_code
             location entry.location
