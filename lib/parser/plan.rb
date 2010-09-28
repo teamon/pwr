@@ -42,21 +42,22 @@ module EclParser
           if td = trs[k+3].css("table tr td").first
             where_when = td.content.strip
 
-            m_when = where_when.match(/(.{2})(?:\/(T(?:P|N)?))? (\d{2}):(\d{2})-(\d{2}):(\d{2})/u)
-            entry.week = m_when[2] || ""
-            entry.time = { :start => { :hour => m_when[3], :min => m_when[4] }, 
-                           :end => { :hour => m_when[5], :min => m_when[6] } }
+            if m_when = where_when.match(/(.{2})(?:\/(T(?:P|N)?))? (\d{2}):(\d{2})-(\d{2}):(\d{2})/u)
+              entry.week = m_when[2] || ""
+              entry.time = { :start => { :hour => m_when[3], :min => m_when[4] }, 
+                             :end => { :hour => m_when[5], :min => m_when[6] } }
 
-            m_where = where_when.match(/bud. (.+?), sala (.+)/u)
-            if m_where
-              entry.building = m_where[1]
-              entry.room = m_where[2]
-            else
-              entry.building = "?"
-              entry.room = "?"
+              m_where = where_when.match(/bud. (.+?), sala (.+)/u)
+              if m_where
+                entry.building = m_where[1]
+                entry.room = m_where[2]
+              else
+                entry.building = "?"
+                entry.room = "?"
+              end
+
+              @days[day_id(m_when[1])] << entry
             end
-
-            @days[day_id(m_when[1])] << entry
           end
         end
       end
