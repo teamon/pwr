@@ -172,12 +172,13 @@ list-style:decimal;
 
 div.radio {
   float: left;
-  width: 400px;
+  width: 300px;
 }
 
 div.radio label {
 	float: left;
 	padding: 4px 17px 4px 4px;
+	width: 60px;
 }
 
 div.radio input {

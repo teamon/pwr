@@ -14,4 +14,10 @@ module PlanGenerator
       ::PDFKit.new(PlanGenerator::HTML.generate!(schedule), OPTIONS).to_pdf
     end
   end
+  
+  class MiniPDFKit < PDFKit
+    def self.generate!(schedule)
+      ::PDFKit.new(PlanGenerator::MiniHTML.generate!(schedule), OPTIONS).to_pdf
+    end
+  end
 end

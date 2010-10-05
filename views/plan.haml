@@ -6,13 +6,18 @@
   .actions
     .radio
       %input{:type => "radio", :name => "type", :id => "type_pdfkit", :value => "pdfkit", :checked => "checked"}
-      %label{:for => "type_pdfkit"} PDF (Nowe!)
+      %label{:for => "type_pdfkit"} PDF
       %input{:type => "radio", :name => "type", :id => "type_html", :value => "html"}
       %label{:for => "type_html"} HTML
       %input{:type => "radio", :name => "type", :id => "type_ical", :value => "ical"}
       %label{:for => "type_ical"} iCal
+      %input{:type => "radio", :name => "type", :id => "type_minipdfkit", :value => "minipdfkit"}
+      %label{:for => "type_minipdfkit"} Mini PDF
+      %input{:type => "radio", :name => "type", :id => "type_minihtml", :value => "minihtml"}
+      %label{:for => "type_minihtml"} Mini HTML
       %input{:type => "radio", :name => "type", :id => "type_vcs", :value => "vcs"}
       %label{:for => "type_vcs"} VCS
+      
       / %input{:type => "radio", :name => "type", :id => "type_pdf", :value => "pdf"}
       / %label{:for => "type_pdf"} Stary PDF
         

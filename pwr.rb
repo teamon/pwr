@@ -53,7 +53,7 @@ post "/plan" do
     end
   end
       
-  if !params[:more].empty?
+  if params[:more] && !params[:more].empty?
     unless @schedule
       @schedule = Schedule.new
       @schedule.year = "2010/2011"
@@ -103,6 +103,14 @@ post "/plan" do
       content_type "text/html"
       attachment "plan-pwr.html"
       PlanGenerator::HTML.generate!(@schedule)
+    when "minipdfkit"
+      content_type "application/pdf"
+      attachment "plan-pwr-mini.pdf"
+      PlanGenerator::MiniPDFKit.generate!(@schedule)
+    when "minihtml"
+      content_type "text/html"
+      attachment "plan-pwr-mini.html"
+      PlanGenerator::MiniHTML.generate!(@schedule)
     when "ical"
       content_type 'text/plain'
       attachment "plan-pwr.ics"

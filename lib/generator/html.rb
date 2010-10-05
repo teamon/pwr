@@ -2,7 +2,10 @@
 
 module PlanGenerator
   class HTML
-    TEMPLATE = File.dirname(__FILE__) + "/../../views/pdf-template.erb"
+    def template
+      File.dirname(__FILE__) + "/../../views/pdf-template.erb"
+    end
+    
     HOURS = (7..21).to_a
     
     def self.generate!(schedule)
@@ -18,7 +21,7 @@ module PlanGenerator
       @row_count = @days.inject(0) {|s,e| s+e.size }
       @hours_count = HOURS.size
           
-      ERB.new(File.read(TEMPLATE)).result(binding)
+      ERB.new(File.read(template)).result(binding)
     end
     
     protected
@@ -33,6 +36,12 @@ module PlanGenerator
       size = (((eh * 60) + em) - ((sh * 60) + sm)) / 5
       
       [top, size]
+    end
+  end
+  
+  class MiniHTML < HTML
+    def template
+      File.dirname(__FILE__) + "/../../views/pdf-template-mini.erb"
     end
   end
 end

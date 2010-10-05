@@ -24,9 +24,19 @@ when "pdfkit"
   pdf = PlanGenerator::PDFKit.generate!(days)
   File.open("test.pdf", "wb") {|f| f.write pdf }
   system("open test.pdf")
+when "minipdfkit"
+  days = EclParser::Plan.parse!(File.read(ARGV[1]))
+  pdf = PlanGenerator::MiniPDFKit.generate!(days)
+  File.open("test.pdf", "wb") {|f| f.write pdf }
+  system("open test.pdf")
 when "html"
   days = EclParser::Plan.parse!(File.read(ARGV[1]))
   html = PlanGenerator::HTML.generate!(days)
+  File.open("test.html", "wb") {|f| f.write html }
+  system("open test.html")
+when "minihtml"
+  days = EclParser::Plan.parse!(File.read(ARGV[1]))
+  html = PlanGenerator::MiniHTML.generate!(days)
   File.open("test.html", "wb") {|f| f.write html }
   system("open test.html")
 when "ical"
