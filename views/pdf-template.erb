@@ -149,12 +149,12 @@
         }
         
         
-        .TN {
+        .TP {
           width: <%= DSIZE / 2 - 8 %>px;
           margin-left: <%= DSIZE / 2 %>px;
         }
         
-        .TP {
+        .TN {
           width: <%= DSIZE / 2 - 8 %>px;
         }
 
@@ -186,7 +186,12 @@
               <% top, size = entry_top_and_size(entry) %>
               <div class="course" style="top: <%= top * HSIZE / 12 %>px; height: <%= size * HSIZE / 12 %>px;">
                 <div class="wrap c_<%= entry.type_code %> <%= entry.week %>">
-                  <div class="h"><%= entry.time_string %></div>
+                  <div class="h">
+                    <%= entry.time_string %>
+                    <% if entry.week != "" %>
+                      | <%= entry.week %>
+                    <% end %>
+                  </div>
                   <div class="n"><%= entry.course_name %></div>
                   <div class="l"><%= entry.location %></div>
                   <div class="p"><%= entry.lecturer %></div>
