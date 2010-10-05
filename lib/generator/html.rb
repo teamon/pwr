@@ -2,7 +2,7 @@
 
 module PlanGenerator
   class HTML
-    TEMPLATE = File.dirname(__FILE__) + "/../../views/pdf-template.haml"
+    TEMPLATE = File.dirname(__FILE__) + "/../../views/pdf-template.erb"
     HOURS = (7..21).to_a
     
     def self.generate!(schedule)
@@ -14,26 +14,22 @@ module PlanGenerator
     end
     
     def to_html
-      @days = @schedule.days.select {|day| !day.empty? }
+      @days = @schedule.days #.select {|day| !day.empty? }
       @row_count = @days.inject(0) {|s,e| s+e.size }
       @hours_count = HOURS.size
           
-      Haml::Engine.new(File.read(TEMPLATE)).def_method(self, :render)
-      render
+      ERB.new(File.read(TEMPLATE)).result(binding)
     end
     
     protected
-    
-    def entry_left(entry)
-      time_size(entry.time[:start])
-    end
-    
-    def entry_width(entry)
-      time_size(entry.time[:end]) - time_size(entry.time[:start])
-    end  
-    
-    def time_size(time)
-      ((time[:hour].to_i-HOURS.first)*60 + time[:min].to_i) * 1.2
+        
+    def entry_size(time)
+      sh = time[:start][:hour].to_i
+      sm = time[:start][:min].to_i
+      eh = time[:end][:hour].to_i
+      em = time[:end][:min].to_i
+      
+      (((eh * 60) + em) - ((sh * 60) + sm)) / 5
     end  
   end
 end

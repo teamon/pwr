@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html lang='pl_PL' xml:lang='pl_PL' xmlns='http://www.w3.org/1999/xhtml'>
+  <head>
+    <title>plan</title>
+    <meta content='text/html; charset=utf-8' http-equiv='content-type' />
+    <style type='text/css'>
+      /*<![CDATA[*/
+        html,body,div,span,h1,h2,p,a,strong,ul,li,fieldset,form,label {
+          background:transparent;
+          border:0;
+          font-size:100%;
+          margin:0;
+          padding:0;
+          vertical-align:baseline;
+        }
+        
+        body {
+          color:#222;
+          font-family:'lucida grande', 'Segoe UI', arial, verdana, 'lucida sans unicode', tahoma, sans-serif;
+          font-size:8pt;
+        }
+        
+        strong {
+          font-weight:700;
+        }
+        
+        #copy {
+          text-align: center;
+          padding-top:10px;
+          padding-bottom: 10px;
+        }
+        
+        #days {
+          cellspacing: 0;
+          cellpadding: 0;
+        }
+        
+        #days td {
+        }
+        
+        .day_name {
+          font-weight: bold;
+          width: 120px;
+          text-align: center;
+          padding: 5px 0;
+          border: 1px solid #ddd
+        }
+        
+        /* debug */
+        td.course {
+          border: 1px solid #ddd;
+        }
+        
+        td.hour {
+          padding: 10px;
+          border: 1px solid #ddd
+        }
+      /*]]>*/
+    </style>
+  </head>
+  <body>
+    <div id='container'>
+      <div id='main'>
+        <table id="days">
+          <tr>
+            <td></td>
+            <% @days.each do |day| %>
+              <td class="day_name"><%= day.name %></td>
+            <% end %>
+          </tr>
+          <% HOURS.each do |hour| %>
+            <% (0..11).each do |i| %>
+              <tr>
+                <% if i == 0 %>
+                    <td class="hour" rowspan="12"><%= "%02d:00" % hour %></td>
+                <% end %>
+              
+                <% @days.each do |day| %>
+                  <% day.entries.select {|e| e.time[:start][:hour].to_i == hour && e.time[:start][:min].to_i == i*5}.each do |entry| %>
+                    <td class="course" rowspan="<%= entry_size(entry.time) %>"><%= entry.course_name %></td>
+                  <% end %>
+                <% end %>
+              </tr>
+            <% end %>
+          <% end %>
+        </table>
+      <div id='copy'>
+        Plan wygenerowany przez http://pwr.heroku.com | http://teamon.eu 2010
+      </div>
+    </div>
+  </body>
+</html>
