@@ -4,7 +4,7 @@
     %textarea{:name => "data"}
   .actions
     %input.submit{:type => "submit", :value => "Policz"}/
-    %input.submit{:type => "button", :value => "Wprowadź własne"}/
+    %input#avg_more.submit{:type => "button", :value => "Wprowadź własne"}/
   #avg
     - if @avg
       - @avg.each do |data|

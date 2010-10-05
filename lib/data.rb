@@ -91,7 +91,7 @@ class Entry
   end
   
   TYPES = {"Wykład" => "W", "Ćwiczenia" => "C", "Seminarium" => "S",
-    "Zajęcia laboratoryjne" => "L", "Projekt" => "P"}
+    "Zajęcia laboratoryjne" => "L", "Projekt" => "P", "Inne" => "X"}
   
   def type_code
     TYPES[type] || type
