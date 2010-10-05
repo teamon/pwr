@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html lang='pl_PL' xml:lang='pl_PL' xmlns='http://www.w3.org/1999/xhtml'>
+  <head>
+    <title>plan</title>
+    <meta content='text/html; charset=utf-8' http-equiv='content-type' />
+    <style type='text/css'>
+      /*<![CDATA[*/
+        <% 
+        DSIZE = 190
+        HSIZE = 48
+        
+        %>
+        html,body,div,span,h1,h2,p,a,strong,ul,li,fieldset,form,label {
+          background:transparent;
+          border:0;
+          font-size:100%;
+          margin:0;
+          padding:0;
+          vertical-align:baseline;
+        }
+        
+        body {
+          color:#222;
+          font-family:'lucida grande', 'Segoe UI', arial, verdana, 'lucida sans unicode', tahoma, sans-serif;
+          font-size:10px;
+        }
+        table {
+          border-collapse: collapse;
+        }
+        td, th {
+          border: 1px solid #ddd;
+          padding: 1px 3px;
+        }
+        th {font-weight: bold;}
+        
+      /*]]>*/
+    </style>
+  </head>
+  <body>
+    <table>
+      <% @days[0..4].reject {|d| d && d.empty? }.each do |day| %>
+        <tr>
+          <th colspan="4"><%= day.name.downcase %></th>
+        </tr>
+        
+        <% day.entries.each do |entry| %>
+          <tr>
+            <td><%= entry.course_name %> (<%= entry.type_code %>)</td>
+            <td><%= entry.time_string %></td>
+            <td><%= entry.location %></td>
+            <td><%= entry.lecturer %></td>
+          </tr>        
+        <% end %>
+      <% end %>
+  </body>
+</html>
