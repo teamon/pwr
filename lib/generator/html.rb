@@ -23,13 +23,16 @@ module PlanGenerator
     
     protected
         
-    def entry_size(time)
-      sh = time[:start][:hour].to_i
-      sm = time[:start][:min].to_i
-      eh = time[:end][:hour].to_i
-      em = time[:end][:min].to_i
+    def entry_top_and_size(entry)
+      sh = entry.time[:start][:hour].to_i
+      sm = entry.time[:start][:min].to_i
+      eh = entry.time[:end][:hour].to_i
+      em = entry.time[:end][:min].to_i
       
-      (((eh * 60) + em) - ((sh * 60) + sm)) / 5
-    end  
+      top = (((sh - HOURS.first) * 60) + sm) / 5
+      size = (((eh * 60) + em) - ((sh * 60) + sm)) / 5
+      
+      [top, size]
+    end
   end
 end

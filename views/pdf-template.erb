@@ -5,6 +5,11 @@
     <meta content='text/html; charset=utf-8' http-equiv='content-type' />
     <style type='text/css'>
       /*<![CDATA[*/
+        <% 
+        DSIZE = 190
+        HSIZE = 48
+        
+        %>
         html,body,div,span,h1,h2,p,a,strong,ul,li,fieldset,form,label {
           background:transparent;
           border:0;
@@ -17,75 +22,187 @@
         body {
           color:#222;
           font-family:'lucida grande', 'Segoe UI', arial, verdana, 'lucida sans unicode', tahoma, sans-serif;
-          font-size:8pt;
+          font-size:10px;
         }
         
-        strong {
-          font-weight:700;
+        #container {
+          width: <%= DSIZE*5 + 57 %>px;
+        }
+        
+        
+        #main {
+          margin: auto;
+          width: <%= DSIZE*5 + 55 %>px;
+          border: 1px solid #ddd;
+          overflow: hidden;
         }
         
         #copy {
-          text-align: center;
           padding-top:10px;
-          padding-bottom: 10px;
+          float: right;
+          width: 500px;
+          text-align: right;
+          
         }
         
-        #days {
-          cellspacing: 0;
-          cellpadding: 0;
+        #legend {
+          padding: 2px 0;
+          float:left;
+          width: 400px;
+          padding-left: 51px;
         }
         
-        #days td {
+        #legend span {
+          padding: 5px;
+          float: left;
+          margin-right: 2px;
         }
         
-        .day_name {
-          font-weight: bold;
-          width: 120px;
+        #days  {
+          overflow: hidden;
+          padding-left: 50px;
+        }
+        
+        #days div {
+          float: left;
           text-align: center;
           padding: 5px 0;
-          border: 1px solid #ddd
+          width: <%= DSIZE %>px;
+          border-left: 1px solid #ddd;
         }
         
-        /* debug */
-        td.course {
-          border: 1px solid #ddd;
+        #hours {
+          float: left;
+          width: 50px;
+          margin-top: -6px;
         }
         
-        td.hour {
-          padding: 10px;
-          border: 1px solid #ddd
+        #hours div {
+          text-align: center;
+          width: 50px;
+          height: <%= HSIZE %>px;
         }
+        
+        .day {
+          width: <%= DSIZE %>px;
+          height: <%= HOURS.size * HSIZE %>px;
+          border-left: 1px solid #ddd;
+          float: left;
+          background: #eee;
+          position: relative;
+        }
+        
+        .course {
+          position: absolute;
+          width: 100%;
+        }
+        
+        .course .wrap {
+          border-width: 1px;
+          border-style: solid;
+          border-radius: 5px;
+          height: 100%;
+          padding: 0 3px;
+          overflow: hidden;
+        }
+        
+        .c_W {
+          background-color: #f3b6b7;
+          border-color: #e63021;
+          color: #e63021;
+        }
+        
+        .c_C {
+          background-color: #aeed91;
+          border-color: #47ae03;
+          color: #47ae03;
+        }
+        
+        .c_L {
+          background-color: #a5c4f7;
+          border-color: #1c64dc;
+          color: #1c64dc;
+        }
+        
+        .c_P {
+          background-color: #efbcf0;
+          border-color: #bb3abd;
+          color: #bb3abd;
+        }
+        
+        .c_S {
+          background-color: #f5dcc0;
+          border-color: #f38e00;
+          color: #f38e00;
+        }
+        
+        .course .n { font-weight: bold; font-size: 11px;}
+        
+        .sep {
+          display: block;
+          height: <%= HSIZE-1 %>px;
+          border-top: 1px solid #ddd;
+        }
+        
+        a {
+          color: #1c64dc;
+        }
+        
+        
+        .TN {
+          width: <%= DSIZE / 2 - 8 %>px;
+          margin-left: <%= DSIZE / 2 %>px;
+        }
+        
+        .TP {
+          width: <%= DSIZE / 2 - 8 %>px;
+        }
+
       /*]]>*/
     </style>
   </head>
   <body>
     <div id='container'>
       <div id='main'>
-        <table id="days">
-          <tr>
-            <td></td>
-            <% @days.each do |day| %>
-              <td class="day_name"><%= day.name %></td>
-            <% end %>
-          </tr>
-          <% HOURS.each do |hour| %>
-            <% (0..11).each do |i| %>
-              <tr>
-                <% if i == 0 %>
-                    <td class="hour" rowspan="12"><%= "%02d:00" % hour %></td>
-                <% end %>
-              
-                <% @days.each do |day| %>
-                  <% day.entries.select {|e| e.time[:start][:hour].to_i == hour && e.time[:start][:min].to_i == i*5}.each do |entry| %>
-                    <td class="course" rowspan="<%= entry_size(entry.time) %>"><%= entry.course_name %></td>
-                  <% end %>
-                <% end %>
-              </tr>
-            <% end %>
+        <div id="days">
+          <% @days[0..4].each do |day| %>
+            <div><%= day.name.downcase %></div>
           <% end %>
-        </table>
+        </div>
+        
+        <div id="hours">
+          <% HOURS.each do |hour| %>
+          <div><%= "%02d:00" % hour %></div>
+          <% end %>
+        </div>
+        
+        <% @days[0..4].each do |day| %>
+          <div class="day">
+            <% HOURS.each do |hour| %>
+              <span class='sep'></span>
+            <% end %>
+            
+            <% day.entries.each do |entry| %>
+              <% top, size = entry_top_and_size(entry) %>
+              <div class="course" style="top: <%= top * HSIZE / 12 %>px; height: <%= size * HSIZE / 12 %>px;">
+                <div class="wrap c_<%= entry.type_code %> <%= entry.week %>">
+                  <div class="h"><%= entry.time_string %></div>
+                  <div class="n"><%= entry.course_name %></div>
+                  <div class="l"><%= entry.location %></div>
+                  <div class="p"><%= entry.lecturer %></div>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+      <div id="legend">
+        <% Entry::TYPES.each_pair do |name, code| %>
+        <span class="box c_<%= code %>"><%= name %></span>
+        <% end %>
+      </div>
       <div id='copy'>
-        Plan wygenerowany przez http://pwr.heroku.com | http://teamon.eu 2010
+        Plan wygenerowany przez <a href="http://pwr.heroku.com">http://pwr.heroku.com</a> | Tymon Tobolski (<a href="http://pwr.heroku.com">http://teamon.eu</a>) 2010
       </div>
     </div>
   </body>

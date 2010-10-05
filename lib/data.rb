@@ -90,9 +90,11 @@ class Entry
     "#{time[:start][:hour]}:#{time[:start][:min]} - #{time[:end][:hour]}:#{time[:end][:min]}"
   end
   
+  TYPES = {"Wykład" => "W", "Ćwiczenia" => "C", "Seminarium" => "S",
+    "Zajęcia laboratoryjne" => "L", "Projekt" => "P"}
+  
   def type_code
-    {"Wykład" => "W", "Ćwiczenia" => "C", "Seminarium" => "S",
-      "Zajęcia laboratoryjne" => "L", "Projekt" => "P"}[type] || type
+    TYPES[type] || type
   end
   
   def type_color

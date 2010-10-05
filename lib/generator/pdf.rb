@@ -1,16 +1,16 @@
 # encoding: utf-8
 
-class Prawn::Document::Box
-  def show(grid_color = "CCCCCC")
-    self.bounding_box do
-      original_stroke_color = pdf.stroke_color
-      pdf.stroke_color = grid_color
-      # pdf.text self.name
-      pdf.stroke_bounds
-      pdf.stroke_color = original_stroke_color
-    end
-  end
-end
+# class Prawn::Document::Box
+#   def show(grid_color = "CCCCCC")
+#     self.bounding_box do
+#       original_stroke_color = pdf.stroke_color
+#       pdf.stroke_color = grid_color
+#       # pdf.text self.name
+#       pdf.stroke_bounds
+#       pdf.stroke_color = original_stroke_color
+#     end
+#   end
+# end
 
 module PlanGenerator
   class PDF
