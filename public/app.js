@@ -175,4 +175,5 @@ $(document).ready(function(){
 	})
 	
 	$("#examples a").fancybox();
+	$("#howto a[rel=howto]").fancybox();
 })

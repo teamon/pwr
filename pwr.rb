@@ -51,6 +51,7 @@ get "/error" do
 end
 
 get "/plan" do
+  @title = "Generator planu zajęć PWR"
   haml :plan
 end
 
@@ -147,6 +148,7 @@ get "/srednia" do
 end
 
 post "/srednia" do
+  @title = "Kalkulator średniej PWR"
   begin
     if params[:data]
       @avg = EclParser::Avg.parse!(params[:data])
