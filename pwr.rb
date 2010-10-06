@@ -25,15 +25,27 @@ PDFKit.configure do |config|
   end
 end
 
+def force_utf(hash)
+  hash.each_pair do |k, v|
+    if v.is_a?(String)
+      hash[k] = v.force_encoding("UTF-8")
+    elsif v.is_a?(Hash)
+      hash[k] = force_utf(v)
+    end
+  end
+  hash
+end
+
 get "/" do
   haml :index
 end
 
 get "/error" do
-  @msg = case params[:eid]
-  when 1 then "Błąd"
-  when 2 then "Brak źródło strony lub listy kursów"
+  @msg = case params[:eid].to_i
+  when 1 then "Błąd generatora"
+  when 2 then "Brak źródła strony lub listy kursów"
   when 3 then "Podane źródło jest nieprawidłowe"
+  else ""
   end
   haml :error
 end
@@ -62,11 +74,12 @@ post "/plan" do
       7.times {|i| @schedule.days[i] = Day.new(i) }
     end
      
-    params[:more].each_pair do |_, c|
+    force_utf(params[:more]).each_pair do |_, c|
       entry = Entry.new
       entry.group_code = c[:group]
       entry.course_code = c[:code]
       entry.course_name = c[:name]
+      
       entry.lecturer = c[:lecturer]
       entry.type = Entry::TYPES.invert[c[:type]]
       entry.week = c[:week]
