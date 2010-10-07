@@ -56,6 +56,16 @@ class Entry
                 
   def initialize
     @row = 0
+    @group_code = ""
+    @course_code = ""
+    @course_name = ""
+    @type = ""
+    @week = ""
+    @time = ""
+    @building = ""
+    @room = ""
+    @lecturer = ""
+    @row = ""
   end
                 
   def start_time
