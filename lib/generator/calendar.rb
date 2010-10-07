@@ -21,7 +21,7 @@ module PlanGenerator
             dtstart ([date.year, "%02d" % date.month, "%02d" % date.day, "T", "%02d" % entry.start_hour, "%02d" % entry.start_min, "00"].join)
             dtend   ([date.year, "%02d" % date.month, "%02d" % date.day, "T", "%02d" % entry.end_hour, "%02d" % entry.end_min, "00"].join)
             summary entry.course_name_with_type
-            description entry.lecturer + "\n" + entry.course_code
+            description (entry.lecturer || "") + "\n" + (entry.course_code || "")
             location entry.location
           end
         end
