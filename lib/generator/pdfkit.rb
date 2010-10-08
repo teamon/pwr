@@ -10,8 +10,8 @@ module PlanGenerator
       :margin_right => '5mm'
     }
     
-    def self.generate!(schedule)
-      ::PDFKit.new(PlanGenerator::HTML.generate!(schedule), OPTIONS).to_pdf
+    def self.generate!(schedule, colors)
+      ::PDFKit.new(PlanGenerator::HTML.generate!(schedule, colors), OPTIONS).to_pdf
     end
   end
   

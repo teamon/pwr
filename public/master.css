@@ -33,7 +33,7 @@ padding:0;
 
 #container {
 margin:auto;
-width:600px;
+width:800px;
 }
 
 #main {
@@ -112,7 +112,7 @@ border:1px solid #ccc;
 float:left;
 padding:3px;
 height:150px;
-width:550px;
+width:750px;
 }
 
 form .actions {
@@ -171,13 +171,13 @@ list-style:decimal;
 
 div.radio {
   float: left;
-  width: 300px;
+  width: 600px;
 }
 
 div.radio label {
 	float: left;
-	padding: 4px 17px 4px 4px;
-	width: 60px;
+	padding: 4px 27px 4px 4px;
+	/*width: 60px;*/
 }
 
 div.radio input {
@@ -188,7 +188,7 @@ div.radio input {
 #menu li {
 	list-style: none;
 	float: left;
-	width: 270px;
+	width: 370px;
 	margin: 0 15px 5px 15px;
 }
 
@@ -249,14 +249,16 @@ padding:5px 10px;
 }
 #examples a {
 	display: block;
-	width: 250px;
+	width: 235px;
 	height: 150px;
 	float: left;
-	border: 8px solid #ddd;
+	border: 5px solid #ddd;
 	margin-bottom: 20px;
+	margin-left: 10px;
+	background-position: center center;
 }
 #examples a.first {
-	margin-right: 20px;
+	margin-left: 0px;
 }
 
 #pmore {
@@ -264,9 +266,62 @@ padding:5px 10px;
 }
 
 #pmore td.name input {
-    width: 110px;
+    width: 145px;
 }
 
 #pmore td.building input {
-    width: 30px;
+    width: 40px;
 }
+
+#advanced {
+    display: none;
+    overflow: hidden;
+}
+
+#colors {
+    float:left;
+    width: 400px;
+}
+
+#colors div {
+    float: left;
+    width: 170px;
+    background: #eee;
+    padding: 10px;
+    margin: 0;
+    margin-bottom: 10px;
+}
+
+#colors div.o {
+    margin-right: 10px;
+}
+
+#colors h5 {
+    font-size: 11pt;
+}
+
+#colors div h6 {
+    font-size: 10pt;
+    padding: 0;
+    margin: 0;
+    padding-bottom: 10px;
+}
+
+#colors div p {
+    overflow: hidden;
+}
+
+#colors div label {
+    float: left;
+    width: 100px;
+}
+
+#colors div input {
+    float: left;
+    width: 60px;
+}
+
+#picker-wrap {
+    float: right;
+}
+

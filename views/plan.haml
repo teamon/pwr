@@ -7,14 +7,14 @@
     .radio
       %input{:type => "radio", :name => "type", :id => "type_pdfkit", :value => "pdfkit", :checked => "checked"}
       %label{:for => "type_pdfkit"} PDF
-      %input{:type => "radio", :name => "type", :id => "type_html", :value => "html"}
-      %label{:for => "type_html"} HTML
-      %input{:type => "radio", :name => "type", :id => "type_ical", :value => "ical"}
-      %label{:for => "type_ical"} iCal
       %input{:type => "radio", :name => "type", :id => "type_minipdfkit", :value => "minipdfkit"}
       %label{:for => "type_minipdfkit"} Mini PDF
+      %input{:type => "radio", :name => "type", :id => "type_html", :value => "html"}
+      %label{:for => "type_html"} HTML
       %input{:type => "radio", :name => "type", :id => "type_minihtml", :value => "minihtml"}
       %label{:for => "type_minihtml"} Mini HTML
+      %input{:type => "radio", :name => "type", :id => "type_ical", :value => "ical"}
+      %label{:for => "type_ical"} iCal
       %input{:type => "radio", :name => "type", :id => "type_vcs", :value => "vcs"}
       %label{:for => "type_vcs"} VCS
       
@@ -27,15 +27,34 @@
     %input#plan_more.submit{:type => "button", :value => "Wprowadź dodatkowe kursy", :style => "float: left"}
     
   #pmore
+  
+  %a#show_advanced{:href => "#"} Pokaż zaawansowane opcje
+  #advanced
+    %h3 Zaawansowane opcje
+    
+    #colors
+      - i=0; Entry::TYPES.each_pair do |name, code|
+        %div{:class => (i+=1) % 2 == 1 ? 'o' : ''}
+          %h6= name
+          %p
+            %label Tło:
+            %input.color{:type => "text", :name => "colors[c_#{code}][0]", :value => PlanGenerator::HTML::DEFAULT_COLORS["c_#{code}"][0]}
+          %p
+            %label Obramowanie:
+            %input.color{:type => "text", :name => "colors[c_#{code}][1]", :value => PlanGenerator::HTML::DEFAULT_COLORS["c_#{code}"][1]}
+          %p
+            %label Czcionka:
+            %input.color{:type => "text", :name => "colors[c_#{code}][2]", :value => PlanGenerator::HTML::DEFAULT_COLORS["c_#{code}"][2]}
+    
+    #picker-wrap
+      #picker
+    
     
   #examples
     %h3 Przykładowe plany
-    %a{:rel => "examples", :href => "/examples/pdf.png", :title => "PDF", :class =>"first"}
-      %img{:src => "/examples/pdf-thumb.png"}
-    %a{:rel => "examples", :href => "/examples/ical.png", :title => "iCal"}
-      %img{:src => "/examples/ical-thumb.png"}
-    %a{:rel => "examples", :href => "/examples/minipdf.png", :title => "MiniPDF"}
-      %img{:src => "/examples/minipdf-thumb.png"}
+    %a.first{:rel => "examples", :style => "background-image: url(/examples/pdf-thumb.png)", :href => "/examples/pdf.png", :title => "PDF"}
+    %a{:rel => "examples", :style => "background-image: url(/examples/ical-thumb.png)", :href => "/examples/ical.png", :title => "iCal"}
+    %a{:rel => "examples", :style => "background-image: url(/examples/minipdf-thumb.png)", :href => "/examples/minipdf.png", :title => "MiniPDF"}
   
   
   #howto

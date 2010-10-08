@@ -58,6 +58,7 @@ function ptr(i){
     	</td>\
     	<td class="building"><input type="text" value="" name="more[' + i + '][building]" /></td>\
     	<td class="building"><input type="text" value="" name="more[' + i + '][room]" /></td>\
+    	<td class="name"><input type="text" value="" name="more[' + i + '][lecturer]" /></td>\
     </tr>'
 }
 
@@ -149,6 +150,7 @@ $(document).ready(function(){
 						<th>Godziny</th>\
 						<th>Budynek</th>\
 						<th>Pokój</th>\
+						<th>Prowadzący</th>\
 					</tr>\
 				</table>'
 				
@@ -176,4 +178,24 @@ $(document).ready(function(){
 	
 	$("#examples a").fancybox();
 	$("#howto a[rel=howto]").fancybox();
+	
+	$("#show_advanced").click(function(){
+	    $("#advanced").show()
+	    $(this).hide()
+	    return false;
+	})
+	
+    var f = $.farbtastic('#picker');
+    var p = $('#picker').css('opacity', 0.15);
+    var selected;
+    $('.color')
+      .each(function () { f.linkTo(this); $(this).css('opacity', 0.75); })
+      .focus(function() {
+        if (selected) {
+          $(selected).css('opacity', 0.75).removeClass('color-selected');
+        }
+        f.linkTo(this);
+        p.css('opacity', 1);
+        $(selected = this).css('opacity', 1).addClass('color-selected');
+      });
 })

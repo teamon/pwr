@@ -98,6 +98,8 @@ post "/plan" do
     @schedule.days.each {|d| d.sort! }
   end
   
+  colors = params[:colors].inject({}) {|r, (k,v)| r[k] = v.inject([]){|a,(kx, vx)| a[kx.to_i] = vx; a }; r  }
+  
   unless @schedule   
     redirect "/error?eid=2"
     return
@@ -112,11 +114,11 @@ post "/plan" do
     when "pdfkit"
       content_type "application/pdf"
       attachment "plan-pwr.pdf"
-      PlanGenerator::PDFKit.generate!(@schedule)
+      PlanGenerator::PDFKit.generate!(@schedule, colors)
     when "html"
       content_type "text/html"
       attachment "plan-pwr.html"
-      PlanGenerator::HTML.generate!(@schedule)
+      PlanGenerator::HTML.generate!(@schedule, colors)
     when "minipdfkit"
       content_type "application/pdf"
       attachment "plan-pwr-mini.pdf"
