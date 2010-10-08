@@ -4,10 +4,10 @@ module PlanGenerator
   class PDFKit 
     OPTIONS = {
       :orientation => "Landscape", 
-      :margin_top => '5mm',
-      :margin_bottom => '5mm',
-      :margin_left => '5mm',
-      :margin_right => '5mm'
+      :margin_top => '3mm',
+      :margin_bottom => '3mm',
+      :margin_left => '3mm',
+      :margin_right => '3mm'
     }
     
     def self.generate!(schedule, colors)

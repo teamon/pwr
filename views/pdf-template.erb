@@ -6,8 +6,9 @@
     <style type='text/css'>
       /*<![CDATA[*/
         <% 
-        DSIZE = 190
-        HSIZE = 48
+        @dnum = @schedule.days_num
+        @dsize = 950 / @dnum
+        @hsize = 48
         
         %>
         html,body,div,span,h1,h2,p,a,strong,ul,li,fieldset,form,label {
@@ -26,13 +27,13 @@
         }
         
         #container {
-          width: <%= DSIZE*5 + 57 %>px;
+          width: <%= @dsize*@dnum + 57 %>px;
         }
         
         
         #main {
           margin: auto;
-          width: <%= DSIZE*5 + 55 %>px;
+          width: <%= (@dsize+1)*@dnum + 50 %>px;
           border: 1px solid #ddd;
           overflow: hidden;
         }
@@ -67,7 +68,7 @@
           float: left;
           text-align: center;
           padding: 5px 0;
-          width: <%= DSIZE %>px;
+          width: <%= @dsize %>px;
           border-left: 1px solid #ddd;
         }
         
@@ -80,12 +81,12 @@
         #hours div {
           text-align: center;
           width: 50px;
-          height: <%= HSIZE %>px;
+          height: <%= @hsize %>px;
         }
         
         .day {
-          width: <%= DSIZE %>px;
-          height: <%= HOURS.size * HSIZE %>px;
+          width: <%= @dsize %>px;
+          height: <%= HOURS.size * @hsize %>px;
           border-left: 1px solid #ddd;
           float: left;
           background: #eee;
@@ -112,7 +113,7 @@
         
         .sep {
           display: block;
-          height: <%= HSIZE-1 %>px;
+          height: <%= @hsize-1 %>px;
           border-top: 1px solid #ddd;
         }
         
@@ -122,12 +123,12 @@
         
         
         .TP {
-          width: <%= DSIZE / 2 - 8 %>px;
-          margin-left: <%= DSIZE / 2 %>px;
+          width: <%= @dsize / 2 - 8 %>px;
+          margin-left: <%= @dsize / 2 %>px;
         }
         
         .TN {
-          width: <%= DSIZE / 2 - 8 %>px;
+          width: <%= @dsize / 2 - 8 %>px;
         }
 
       /*]]>*/
@@ -137,7 +138,7 @@
     <div id='container'>
       <div id='main'>
         <div id="days">
-          <% @days[0..4].each do |day| %>
+          <% @days[0..@dnum-1].each do |day| %>
             <div><%= day.name.downcase %></div>
           <% end %>
         </div>
@@ -148,7 +149,7 @@
           <% end %>
         </div>
         
-        <% @days[0..4].each do |day| %>
+        <% @days[0..@dnum-1].each do |day| %>
           <div class="day">
             <% HOURS.each do |hour| %>
               <span class='sep'></span>
@@ -156,7 +157,7 @@
             
             <% day.entries.each do |entry| %>
               <% top, size = entry_top_and_size(entry) %>
-              <div class="course" style="top: <%= top * HSIZE / 12 %>px; height: <%= size * HSIZE / 12 %>px;">
+              <div class="course" style="top: <%= top * @hsize / 12 %>px; height: <%= size * @hsize / 12 %>px;">
                 <div class="wrap c_<%= entry.type_code %> <%= entry.week %>">
                   <div class="h">
                     <%= entry.time_string %>

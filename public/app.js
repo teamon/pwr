@@ -50,6 +50,8 @@ function ptr(i){
                 <option value="2">śr</option>\
                 <option value="3">czw</option>\
                 <option value="4">pt</option>\
+                <option value="5">sb</option>\
+                <option value="6">nd</option>\
     	    </select>\
     	</td>\
     	<td class="hours">\

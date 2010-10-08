@@ -2,6 +2,10 @@
 
 class Schedule
   attr_accessor :days, :year, :semester
+  
+  def days_num
+    days[5].empty? && days[6].empty? ? 5 : 7
+  end
 end
 
 class Day
