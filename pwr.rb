@@ -59,7 +59,7 @@ post "/plan" do
   if params[:data] && params[:data] != ""
     begin
       @schedule = EclParser::Plan.parse!(params[:data])
-    rescue
+    rescue Exception => e
       puts e.message
       puts e.backtrace
       redirect "/error?eid=3"
