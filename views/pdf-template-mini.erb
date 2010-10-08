@@ -46,7 +46,7 @@
         <% day.entries.each do |entry| %>
           <tr>
             <td><%= entry.course_name %> (<%= entry.type_code %>)</td>
-            <td><%= entry.time_string %></td>
+            <td><%= entry.time_string %> <%= entry.week %></td>
             <td><%= entry.location %></td>
             <td><%= entry.lecturer %></td>
           </tr>        
