@@ -5,11 +5,6 @@
     <meta content='text/html; charset=utf-8' http-equiv='content-type' />
     <style type='text/css'>
       /*<![CDATA[*/
-        <% 
-        DSIZE = 190
-        HSIZE = 48
-        
-        %>
         html,body,div,span,h1,h2,p,a,strong,ul,li,fieldset,form,label {
           background:transparent;
           border:0;
@@ -38,7 +33,7 @@
   </head>
   <body>
     <table>
-      <% @days[0..4].reject {|d| d && d.empty? }.each do |day| %>
+      <% @days[0..@schedule.days_num-1].reject {|d| d && d.empty? }.each do |day| %>
         <tr>
           <th colspan="4"><%= day.name.downcase %></th>
         </tr>
