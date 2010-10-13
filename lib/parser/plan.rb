@@ -38,10 +38,10 @@ module EclParser
           tds = trs[k+2].css("td")
           entry.lecturer = tds[0].content.strip
           entry.type = tds[1].content.strip
-
-          if td = trs[k+3].css("table tr td").first
+          
+          trs[k+3].css("table tr td").each do |td|
             where_when = td.content.strip
-
+            
             if m_when = where_when.match(/(.{2})(?:\/(T(?:P|N)?))? (\d{2}):(\d{2})-(\d{2}):(\d{2})/u)
               entry.week = m_when[2] || ""
               entry.time = { :start => { :hour => m_when[3], :min => m_when[4] }, 
@@ -55,8 +55,8 @@ module EclParser
                 entry.building = "?"
                 entry.room = "?"
               end
-
-              @days[day_id(m_when[1])] << entry
+            
+              @days[day_id(m_when[1])] << entry.dup
             end
           end
         end

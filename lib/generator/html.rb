@@ -16,8 +16,8 @@ module PlanGenerator
       "c_X" => %w(#ccc1ec #5c3ab2 #5c3ab2)     
     }
     
-    def self.generate!(schedule, colors = DEFAULT_COLORS)
-      new(schedule, colors).to_html
+    def self.generate!(schedule, colors = nil)
+      new(schedule, colors || DEFAULT_COLORS).to_html
     end
         
     def initialize(schedule, colors)
