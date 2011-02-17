@@ -2,7 +2,7 @@
 require "rubygems"
 require 'nokogiri'
 require "pdfkit"
-require 'icalendar'
+require 'ri_cal'
 require 'vpim'
 require "haml"
 

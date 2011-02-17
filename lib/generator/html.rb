@@ -56,6 +56,12 @@ module PlanGenerator
       
       [top, size]
     end
+    
+    def entry_wider?(entry, top, size, all)
+      stop = top+size
+      
+      entry.week != "" && all.any? {|e, (t,s)| (t >= top && t <= stop) || (t < top && t+s > top) } ? "wider" : ""
+    end
   end
   
   class MiniHTML < HTML

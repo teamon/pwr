@@ -130,6 +130,11 @@
         .TN {
           width: <%= @dsize / 2 - 8 %>px;
         }
+        
+        .wider {
+          width: <%= @dsize / 2 - 8 + (@dsize / 10) %>px;
+          margin-left: <%= @dsize / 2 - (@dsize / 10) %>px;
+        }
 
       /*]]>*/
     </style>
@@ -155,10 +160,10 @@
               <span class='sep'></span>
             <% end %>
             
-            <% day.entries.each do |entry| %>
-              <% top, size = entry_top_and_size(entry) %>
+            <% entries = day.entries.map {|e| [e, entry_top_and_size(e)] } %>
+            <% entries.each do |entry, (top, size)| %>
               <div class="course" style="top: <%= top * @hsize / 12 %>px; height: <%= size * @hsize / 12 %>px;">
-                <div class="wrap c_<%= entry.type_code %> <%= entry.week %>">
+                <div class="wrap c_<%= entry.type_code %> <%= entry.week %> <%= entry_wider?(entry, top, size, entries) %>">
                   <div class="h">
                     <%= entry.time_string %>
                     <% if entry.week != "" %>
