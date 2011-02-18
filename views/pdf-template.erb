@@ -122,18 +122,22 @@
         }
         
         
-        .TP {
+        .w_TP {
           width: <%= @dsize / 2 - 8 %>px;
           margin-left: <%= @dsize / 2 %>px;
         }
         
-        .TN {
+        .w_TN {
           width: <%= @dsize / 2 - 8 %>px;
         }
         
-        .wider {
+        .w_TP_wider {
           width: <%= @dsize / 2 - 8 + (@dsize / 10) %>px;
           margin-left: <%= @dsize / 2 - (@dsize / 10) %>px;
+        }
+        
+        .w_TN_wider {
+          width: <%= @dsize / 2 - 8 + (@dsize / 10) %>px;
         }
 
       /*]]>*/
@@ -163,7 +167,7 @@
             <% entries = day.entries.map {|e| [e, entry_top_and_size(e)] } %>
             <% entries.each do |entry, (top, size)| %>
               <div class="course" style="top: <%= top * @hsize / 12 %>px; height: <%= size * @hsize / 12 %>px;">
-                <div class="wrap c_<%= entry.type_code %> <%= entry.week %> <%= entry_wider?(entry, top, size, entries) %>">
+                <div class="wrap c_<%= entry.type_code %> <%= entry_week_wider_class(entry, top, size, entries) %>">
                   <div class="h">
                     <%= entry.time_string %>
                     <% if entry.week != "" %>

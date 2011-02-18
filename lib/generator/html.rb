@@ -57,10 +57,13 @@ module PlanGenerator
       [top, size]
     end
     
-    def entry_wider?(entry, top, size, all)
-      stop = top+size
+    def entry_week_wider_class(entry, top, size, all)
+      return if entry.week == ""
       
-      entry.week != "" && all.any? {|e, (t,s)| (t >= top && t <= stop) || (t < top && t+s > top) } ? "wider" : ""
+      cls = "w_#{entry.week}"
+      
+      stop = top+size
+      cls + (all.select {|e, (t,s)| (t >= top && t <= stop) || (t+s >= top && t+s <= stop) }.size > 1 ? "" : "_wider")
     end
   end
   
