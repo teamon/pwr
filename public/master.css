@@ -325,3 +325,20 @@ padding:5px 10px;
     float: right;
 }
 
+#new {
+  text-align: center;
+  font-size: 12pt;
+  color: red;
+  display: block;
+  padding: 20px 0 20px 0;
+  margin-top: -10px;
+}
+
+
+#new span {
+  display: block;
+  margin-top: 10px;
+  font-size: 13pt;
+}
+
+
